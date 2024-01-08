@@ -1,0 +1,291 @@
+.header{
+    display: flex;
+    flex-flow: column;
+    position: fixed;
+    width: 15%;
+    height: 100vh;
+    background-color: #17202A;
+    transition: all .2s;
+}
+.header .LogoHeader{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+.header .LogoHeader img{
+    max-width: 160px;   
+    cursor: pointer;
+}
+.header .logout{
+    display: flex;
+    align-items: center;
+}
+.header .items{
+    display: flex;
+    flex-flow: column;
+    border-radius: 5px;
+    margin: 0;
+    width: 100%;
+    padding: 10px;
+}
+.header .items .item:hover{
+    background-color: #F1C40F;
+    transition: .3s;
+}
+.header .items:last-of-type{
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.header .items:last-of-type button{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 14px;
+}
+.header .items:last-of-type button:hover{
+    background-color: rgb(223, 125, 127);
+    transition: .2s;
+}
+.header .items:last-of-type button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header .items:last-of-type button svg{
+    margin-right: 10px;
+}
+.header .items:last-of-type button h5{
+    display: flex;
+    font-size: 14px;
+    align-items: center;
+}
+.header .items .item{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.header .items .item.active{
+    background-color: #F1C40F;
+}
+.header .items .item svg{
+    font-size: 20px;
+    margin-right: 15px;
+    fill: #F8F9F9;
+}
+.header .items .item h5{
+    font-size: 14px;
+    color: #F8F9F9;
+    user-select: none;
+}
+.derecho{
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+}
+
+
+
+
+.headerReduce{
+    display: flex;
+    flex-flow: column;
+    position: fixed;
+    width: 5%;
+    height: 100vh;
+    background-color: #17202A;
+    transition: all .3s;
+}
+.headerReduce .LogoHeader{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+.headerReduce .LogoHeader img{
+    width: 100%;
+    height: 60px;
+    object-fit: contain;
+    padding: 0 10px;
+    cursor: pointer;
+}
+.headerReduce .logout{
+    display: flex;
+    align-items: center;
+}
+.headerReduce .items{
+    display: flex;
+    flex-flow: column;
+    border-radius: 5px;
+    margin: 0;
+    width: 100%;
+    padding: 10px;
+}
+.headerReduce .items .item:hover{
+    background-color: #F1C40F;
+    transition: .3s;
+}
+
+.headerReduce .items:last-of-type{
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.headerReduce .items:last-of-type button{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 14px;
+}
+.headerReduce .items:last-of-type button:hover{
+    background-color: rgb(223, 125, 127);
+    transition: .2s;
+}
+.headerReduce .items:last-of-type button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.headerReduce .items:last-of-type button svg{
+    margin: 0;
+}
+.headerReduce .items:last-of-type button h5{
+    display: none;
+}
+.headerReduce .items .item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.headerReduce .items .item.active{
+    background-color: #F1C40F;
+}
+.headerReduce .items .item svg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    fill: #F8F9F9;
+    margin: 0;
+
+}
+
+.headerReduce .items .item h5{
+    display: none;
+}
+.derechoReduce{
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+}
+
+
+@media (max-width: 1180px) {
+    .header .LogoHeader img{
+        max-width: 90%;
+    }
+    .header.items .item h5{
+        font-size: 10px;
+    }
+    .header .items:last-of-type button h5{
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 1080px) {
+    .headerReduce{
+        width: 15%;
+    }
+    .header .LogoHeader img{
+        max-width: 90%;
+    }
+    
+    .header .items{
+        display: flex;
+         background-color: #17202A;
+         width: 100%;
+         margin: 0 auto;
+         padding: 0;
+         margin-bottom: 12px;
+    }
+    .header .items:last-of-type{
+        display: flex;
+        justify-content: center;
+        background-color: transparent;
+        width: 100%;
+        margin: 10px auto; 
+        padding: 0;
+        align-items: center;
+    }
+    .header .items h5{
+        display: none;
+    }
+    .header .items:hover{
+        background-color: none;
+    }
+    
+    .header .items .item{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        height: 40px;
+        width: 60%;
+        margin: 10px auto;
+    }
+    
+    .header .items .item svg{
+        margin: 0;
+        padding: 0;
+        fill: #F8F9F9;
+        width: 26px;
+        height: 26px;
+    }
+
+    .header .items:last-of-type button{
+        width: 60%;
+        margin: 10px auto;
+        padding: 0;
+        height: 40px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    .header .items:last-of-type button:hover > svg{
+        fill: #17202A;
+        transition: .2s;
+    }
+    
+    .header .items:last-of-type button svg{
+        margin: 0;
+        padding: 0;
+        width: 26px;
+        height: 26px;
+        fill:  rgb(223, 125, 127);
+    }
+    
+    .header .items:last-of-type button h5{
+        display: none;
+    }
+    
+}
