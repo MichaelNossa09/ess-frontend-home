@@ -46,7 +46,7 @@ export class HomeComponent implements OnDestroy{
 
   private apiUrl = 'http://127.0.0.1:8000/api';
   data: any;
-  vista: string = 'Pools & Eventos';
+  vista: string = 'Conectividad';
 
   GetUser() {
     const authToken = this.service.getDecryptedToken();

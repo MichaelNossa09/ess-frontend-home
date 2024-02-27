@@ -1,1 +1,444 @@
-<p>conectividad works!</p>
+<div
+  [ngClass]="{
+    'contenedor-conect': !hasClickedMenu,
+    'contenedor-conectReduce': hasClickedMenu
+  }"
+>
+  <div class="conect">
+    @if (modal) {
+    <div class="button">
+      <button (click)="desactiveModal()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="16"
+          width="14"
+          viewBox="0 0 448 512"
+        >
+          <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+          <path
+            d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
+          /></svg
+        >Regresar
+      </button>
+    </div>
+    <div class="modalConect">
+      <form
+        [formGroup]="conectsForm"
+        (ngSubmit)="onConect()"
+        enctype="multipart/form-data"
+      >
+        <div class="data">
+            <div class="conectate">
+                <h5>ISP - CONECTATE</h5>
+                <div class="content">
+                    <div class="left">
+                        <div class="estado">
+                            <label for="c-estado">Estado</label>
+                            <select id="c-estado" formControlName="estado_conectate" name="estado_conectate" required>
+                                <option value="" disabled selected hidden>Selecciona un estado</option>
+                                <option value="Bueno">Bueno</option>
+                                <option value="Malo">Malo</option>
+                            </select>
+                        </div>
+                        <div class="velocidad">
+                            <label for="c-velocidad">Velocidad</label>
+                            <input type="text" id="c-velocidad" formControlName="velocidad_conectate" name="velocidad_conectate"   placeholder="Ingrese velocidad" required>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="c-pe">
+                            <label for="c-pe">PE - Máximo</label>
+                            <input type="text" id="c-pe" formControlName="pico_entrante_max_conectate" name="pico_entrante_max_conectate" placeholder="Ingrese PE-Max" required>
+                        </div>
+                        <div class="c-ps">
+                            <label for="c-ps">PS - Máximo</label>
+                            <input type="text" id="c-ps" formControlName="pico_salida_max_conectate" name="pico_salida_max_conectate" placeholder="Ingrese PS-Max" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="itelkom">
+                <h5>ISP - ITELKOM</h5>
+                <div class="content">
+                    <div class="left">
+                        <div class="estado">
+                            <label for="i-estado">Estado</label>
+                            <select id="i-estado" formControlName="estado_itelkom" name="estado_itelkom" required>
+                                <option value="" disabled selected hidden>Selecciona un estado</option>
+                                <option value="Bueno">Bueno</option>
+                                <option value="Malo">Malo</option>
+                            </select>
+                        </div>
+                        <div class="velocidad">
+                            <label for="i-velocidad">Velocidad</label>
+                            <input type="text" id="i-velocidad" formControlName="velocidad_itelkom" name="velocidad_itelkom" placeholder="Ingrese velocidad" required>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="i-pe">
+                            <label for="i-pe">PE - Máximo</label>
+                            <input type="text" id="i-pe" formControlName="pico_entrante_max_itelkom" name="pico_entrante_max_itelkom" placeholder="Ingrese PE-Max" required>
+                        </div>
+                        <div class="i-ps">
+                            <label for="i-ps">PS - Máximo</label>
+                            <input type="text" id="i-ps" formControlName="pico_salida_max_itelkom" name="pico_salida_max_itelkom" placeholder="Ingrese PS-Max" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="alertas-workspace">
+            <div class="alertas">
+                <h5>ALERTAS</h5>
+                <div class="content">
+                    <div class="left">
+                        <div class="graves">
+                            <label for="graves">Graves</label>
+                            <input type="number" id="graves" formControlName="alertas_graves" name="alertas_graves"  required>
+                        </div>
+                        <div class="medias">
+                            <label for="medias">Medias</label>
+                            <input type="number" id="medias" formControlName="alertas_medias" name="alertas_medias" required>
+                        </div>
+                        <div class="menores">
+                            <label for="menores">Menores</label>
+                            <input type="number" id="menores" formControlName="alertas_menores" name="alertas_menores" required>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="obs-g">
+                            <label for="obs-g">Observaciones Graves</label>
+                            <input type="text" id="obs-g" formControlName="observaciones_graves" name="observaciones_graves" placeholder="Ingrese Observaciones Graves" required>
+                        </div>
+                        <div class="obs-med">
+                            <label for="obs-med">Observaciones Medias</label>
+                            <input type="text" id="obs-med" formControlName="observaciones_medias" name="observaciones_medias" placeholder="Ingrese Observaciones Medias" required>
+                        </div>
+                        <div class="obs-men">
+                            <label for="obs-men">Observaciones Menores</label>
+                            <input type="text" id="obs-men" formControlName="observaciones_menores" name="observaciones_menores" placeholder="Ingrese Observaciones Menores" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="workspace">
+                <h5>WORKSPACE</h5>
+                <div class="workspace-div">
+                    <label for="wks">Información de Workspace</label>
+                    <textarea id="wks" formControlName="informacion_workspace" name="informacion_workspace" placeholder="Ingrese información de Workspace" required>
+                    </textarea>
+                </div>
+                <h5>DATACENTER</h5>
+                <div class="temp-div">
+                    <label for="temp">Temperatura</label>
+                    <input type="number" id="temp" formControlName="temperatura_datacenter" name="temperatura_datacenter" placeholder="Ingrese temperatura" required>
+                </div>
+            </div>
+        </div>
+        <div class="v_fisica">
+          <div class="v_fisica_1">
+            <label for="v_fisica_one">Verificación Física 1</label>
+            <input
+              type="file"
+              id="v_fisica_one"
+              accept=".jpg, .png, .jpeg"
+              formControlName="v_fisica_1"
+              name="v_fisica_1"
+              alt="Verificación 1"
+              required
+              (change)="handleFileInput1($event)"
+            />
+            <div *ngIf="previsualizacion" class="img_v_fisica_1">
+              <img [src]="previsualizacion" alt="Imagen seleccionada" />
+            </div>
+          </div>
+          <div class="v_fisica_2">
+            <label for="v_fisica_two">Verificación Física 2</label>
+            <input
+              type="file"
+              id="v_fisica_two"
+              accept=".jpg, .png, .jpeg"
+              formControlName="v_fisica_2"
+              name="v_fisica_2"
+              alt="Verificación 2"
+              required
+              (change)="handleFileInput2($event)"
+            />
+            <div *ngIf="previsualizacion2" class="img_v_fisica_2">
+              <img [src]="previsualizacion2" alt="Imagen seleccionada" />
+            </div>
+          </div>
+        </div>
+
+        <div class="submit">
+          <input type="submit" value="Regístrar" />
+        </div>
+      </form>
+    </div>
+    }@else {
+    <div class="button">
+      <button (click)="activeModal()">Agregar Conectividad</button>
+    </div>
+    @defer (on viewport) {
+    <div class="table">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>No.</th>
+          <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Estado Conectate">
+          <th mat-header-cell *matHeaderCellDef>Estado C</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.estado_conectate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Velocidad Conectate">
+          <th mat-header-cell *matHeaderCellDef>Velocidad C</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.velocidad_conectate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Estado Itelkom">
+          <th mat-header-cell *matHeaderCellDef>Estado I</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.estado_itelkom }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Velocidad Itelkom">
+          <th mat-header-cell *matHeaderCellDef>Velocidad I</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.velocidad_itelkom }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Alertas Graves">
+          <th mat-header-cell *matHeaderCellDef>Alertas G</th>
+          <td mat-cell *matCellDef="let element">
+            @if (element.alertas_graves > 2) {
+            <p
+              style="
+                background-color: rgb(172, 38, 38);
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                border-radius: 5px;
+                align-items: center;
+                color: #fff;
+              "
+            >
+              {{ element.alertas_graves }}
+            </p>
+            }@else{
+            {{ element.alertas_graves }} }
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Observaciones Graves">
+          <th mat-header-cell *matHeaderCellDef>Observaciones G</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.observaciones_graves }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Alertas Medias">
+          <th mat-header-cell *matHeaderCellDef>Alertas Med</th>
+          <td mat-cell *matCellDef="let element">
+            @if (element.alertas_medias > 2) {
+            <p
+              style="
+                background-color: rgb(172, 38, 38);
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                border-radius: 5px;
+                align-items: center;
+                color: #fff;
+              "
+            >
+              {{ element.alertas_medias }}
+            </p>
+            }@else{
+            {{ element.alertas_medias }} }
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Observaciones Medias">
+          <th mat-header-cell *matHeaderCellDef>Observaciones Med</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.observaciones_medias }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Alertas Menores">
+          <th mat-header-cell *matHeaderCellDef>Alertas Men</th>
+          <td mat-cell *matCellDef="let element">
+            @if (element.alertas_menores > 2) {
+            <p
+              style="
+                background-color: rgb(172, 38, 38);
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                border-radius: 5px;
+                align-items: center;
+                color: #fff;
+              "
+            >
+              {{ element.alertas_menores }}
+            </p>
+            }@else{
+            {{ element.alertas_menores }} }
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Observaciones Menores">
+          <th mat-header-cell *matHeaderCellDef>Observaciones Men</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.observaciones_menores }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Alertas Totales">
+          <th mat-header-cell *matHeaderCellDef>Alertas</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.alertas_totales }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Workspace">
+          <th mat-header-cell *matHeaderCellDef>Workspace</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.informacion_workspace }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="I - Pico Entrante Max">
+          <th mat-header-cell *matHeaderCellDef>I-PE Máximo</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.pico_entrante_max_itelkom }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="I - Pico Salida Max">
+          <th mat-header-cell *matHeaderCellDef>I-PS Máximo</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.pico_salida_max_itelkom }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="C - Pico Entrante Max">
+          <th mat-header-cell *matHeaderCellDef>C-PE Máximo</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.pico_entrante_max_conectate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="C - Pico Salida Max">
+          <th mat-header-cell *matHeaderCellDef>C-PS Máximo</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.pico_salida_max_conectate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Temp Datacenter">
+          <th mat-header-cell *matHeaderCellDef>Temp Datacenter</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.temperatura_datacenter }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Verificación 1">
+          <th mat-header-cell *matHeaderCellDef>Verificación 1</th>
+          <td mat-cell *matCellDef="let element">
+            <img
+              src="{{ baseUrl + '/' + 'storage' + '/' + element.v_fisica_1 }} "
+              alt=""
+            />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Verificación 2">
+          <th mat-header-cell *matHeaderCellDef>Verificación 2</th>
+          <td mat-cell *matCellDef="let element">
+            <img
+              src="{{ baseUrl + '/' + 'storage' + '/' + element.v_fisica_2 }} "
+              alt=""
+            />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Regístrado Por">
+          <th mat-header-cell *matHeaderCellDef>Registrado Por</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.registrado_por }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Fecha Registro">
+          <th mat-header-cell *matHeaderCellDef>Fecha Registro</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.created_at | date : "dd/MM/YYYY" }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Aprobado Por">
+          <th mat-header-cell *matHeaderCellDef>Aprobado Por</th>
+          <td mat-cell *matCellDef="let element">
+            @if (element.aprobado_por) {
+            {{ element.aprobado_por }}
+            }@else {
+            <p>Pendiente</p>
+            }
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    }@placeholder {
+    <p>Cargando...</p>
+    }
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      class="pagination"
+    >
+    </mat-paginator>
+    @if (dataCargada) {
+    <div class="charts">
+      <div class="chart1">
+        <div class="chart">
+          <app-chart1 [fechas]="fechas" [IPEMax]="IPEMax" [IPSMax]="IPSMax" [CPEMax]="CPEMax" [CPSMax]="CPSMax"></app-chart1>
+        </div>
+      </div>
+      <div class="chart2">
+        <div class="chart">
+            <app-chart2></app-chart2>
+        </div>
+      </div>
+    </div>
+    } }
+    <div class="alert-success" *ngIf="success">
+      <h5>
+        Conectividad registrada con éxito
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="16"
+          width="14"
+          viewBox="0 0 448 512"
+        >
+          <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+          <path
+            d="M64 80c-8.8 0-16 7.2-16 16V416c0 8.8 7.2 16 16 16H384c8.8 0 16-7.2 16-16V96c0-8.8-7.2-16-16-16H64zM0 96C0 60.7 28.7 32 64 32H384c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM337 209L209 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L303 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
+          />
+        </svg>
+      </h5>
+    </div>
+  </div>
+</div>

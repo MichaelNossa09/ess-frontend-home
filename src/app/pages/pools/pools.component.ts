@@ -11,6 +11,7 @@ import { Chart2Component } from '../../caroussel/pools/chart2/chart2.component';
 import { DataPoolService } from '../../services/data-pool.service';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table'
 import { MatPaginatorModule, MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+
 export interface PeriodicElement {
   position: number;
   capacidad_pool_a: any;
@@ -119,7 +120,6 @@ export class PoolsComponent implements OnDestroy, MatPaginatorIntl{
 
   public baseUrl = 'http://127.0.0.1:8000';
   private poolsUrl = 'http://127.0.0.1:8000/api/pool';
-  private notiUrl = 'http://127.0.0.1:8000/api/notificaciones';
 
   GetPools(){
     const authToken = this.service.getDecryptedToken();
@@ -204,7 +204,6 @@ export class PoolsComponent implements OnDestroy, MatPaginatorIntl{
         if(this.user){
           formData.append('registrado_por', this.user.name);
         }
-        console.log(formData);
         
         if(this.bandera){
           alert('Las capacidades disponibles no pueden ser mayor a la capacidad total.');
@@ -256,7 +255,8 @@ export class PoolsComponent implements OnDestroy, MatPaginatorIntl{
                 }
               },
               error: (error) => {
-                alert(error.error.error);
+                console.log(error.error.error);
+                
               },
             });
         }
@@ -296,7 +296,7 @@ export class PoolsComponent implements OnDestroy, MatPaginatorIntl{
       this.extraerBase64(archivoCapturadao).then((imagen : any) => {
         this.previsualizacion = imagen.base;
       })
-      this.archivo1 = archivoCapturadao;
+      this.archivo1 = archivoCapturadao; 
     }
 
     handleFileInput2(event: any): void {

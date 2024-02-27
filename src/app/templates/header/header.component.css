@@ -82,7 +82,20 @@
     margin-right: 10px; 
     position: relative;
     padding: 10px;
+    position: relative;
 }
+
+.header .noti .campana .cont{
+    display: flex;
+    position: absolute;
+    top: 5px;
+    left: 28px;
+}
+.header .noti .campana .cont p{
+    font-size: 14px;
+    color: rgb(226, 84, 84);
+}
+
 .header .noti .campana svg {
     width: 20px;
     height: 20px;
@@ -112,6 +125,7 @@
     display: block;
     transition: all .3s;
 }
+
 .header .noti .campana .notificaciones .label{
     display: flex;
     flex-flow: row;
@@ -185,7 +199,6 @@
 
 
 
-
 .headerReduce .noti{
     height: 100%;
     display: flex;
@@ -193,52 +206,23 @@
     padding: 10px;
     justify-content: space-between;
 }
-.headerReduce .noti .campana{
-    background-color: #fff;
-    padding: 8px 12px;
-    border-radius: 50%;
-    position: relative;
-    margin-right: 20px; 
-    cursor: pointer;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-.headerReduce .noti .campana svg{
-    font-size: 15px;
-}
-.headerReduce .noti .campana:hover{
-    background-color: rgba(0, 0, 0, 0.1);
-    transition: .3s;
-}
-.headerReduce .noti .user{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 20px;
-    background-color: #fff;
-    padding: 5px;
-    cursor: pointer;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-.headerReduce .noti .user h5{
-    margin: 0 10px;
-}
-.headerReduce .noti .user:hover{
-    background-color: rgba(0, 0, 0, 0.1);
-    transition: .3s;
-}
-.headerReduce .noti .user .photo{
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-}
-.headerReduce .noti .user .photo img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
 
+.headerReduce .noti .campana{
+    margin-right: 10px; 
+    position: relative;
+    padding: 10px;
+}
+.headerReduce .noti .campana svg {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.headerReduce .noti .campana svg:hover{
+    fill: rgb(52, 101, 117);
+    transition: .2s;
+}
 .headerReduce .noti .campana .notificaciones{
+    display: none;
     position: absolute;
     top: 50px;
     left: -100px;
@@ -251,6 +235,11 @@
     padding: 5px;
     box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.5);
     z-index: 999;
+    transition: all .2s;
+}
+.headerReduce .noti .campana .notificaciones.show{
+    display: block;
+    transition: all .3s;
 }
 .headerReduce .noti .campana .notificaciones .label{
     display: flex;
@@ -260,6 +249,7 @@
     margin-bottom: 5px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    cursor: pointer;
 }
 .headerReduce .noti .campana .notificaciones .label:hover{
     background-color: rgba(0, 0, 0, 0.1);
@@ -289,6 +279,37 @@
     justify-content: center;
     width: 70%;
 }
+
+.headerReduce .noti .user{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 20px;
+    background-color: #fff;
+    padding: 5px;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.headerReduce .noti .user h5{
+    margin: 0 10px;
+}
+.headerReduce .noti .user:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: .3s;
+}
+.headerReduce .noti .user .photo{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.headerReduce .noti .user .photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+
 
 .name{
     display: none;
