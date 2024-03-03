@@ -12,7 +12,7 @@ import { DataPoolService } from '../../services/data-pool.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnDestroy{
+export class HeaderComponent{
   public clicked: boolean = false;
   user : any;
   @Input() notificaciones: any[] = [];
@@ -23,22 +23,8 @@ export class HeaderComponent implements OnDestroy{
         this.user = res.data;
       },
       error : (error) => {
-        alert(error.error.error)
+        alert(error.error)
       }
     });
-    this.subscription = this.notiService.data$.subscribe((data) => {
-      this.notificaciones = data; 
-    })
-  }
-  mostrarNotificaciones: boolean = false;
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-  menu(){
-    this.clicked = !this.clicked;
-    this.service.toggleMenu();
-  }
-  toggleMostrar() {
-    this.mostrarNotificaciones = !this.mostrarNotificaciones;
   }
 }

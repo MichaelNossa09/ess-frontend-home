@@ -17,19 +17,16 @@ import { Observable, Subscription } from 'rxjs';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnDestroy{
-  private menuSubscription: Subscription;
-  public hasClickedMenu: boolean = true;
+export class HomeComponent{
+
   notificaciones: any[] = [];
+  isAdmin = false;
   constructor(
     private http: HttpClient,
     private router: Router,
     private service: EncryptService
   ) {
     this.GetUser();
-    this.menuSubscription = this.service.menuClick$.subscribe(() => {
-      this.hasClickedMenu = !this.hasClickedMenu;
-    })
       this.service.getNotificaciones().subscribe({
       next: (res) => {
         this.notificaciones = res.slice().reverse();
@@ -40,13 +37,9 @@ export class HomeComponent implements OnDestroy{
     });
   }
 
-  ngOnDestroy(): void {
-    this.menuSubscription.unsubscribe();
-  }
-
-  private apiUrl = 'http://127.0.0.1:8000/api';
+  private apiUrl = 'http://localhost/ess-backend/public/api';
   data: any;
-  vista: string = 'Conectividad';
+  vista: string = 'Pools & Eventos';
 
   GetUser() {
     const authToken = this.service.getDecryptedToken();
@@ -61,6 +54,9 @@ export class HomeComponent implements OnDestroy{
       next: (res) => {
         if (res.exito == 1) {
           this.data = res.data;
+          if(this.data.rol == 'Admin'){
+            this.isAdmin = true;
+          }
         }else{
           localStorage.removeItem('tk');
           localStorage.removeItem('correo');

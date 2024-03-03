@@ -26,7 +26,7 @@ export class LoginComponent {
     ]),
   });
 
-  private apiUrl = 'http://127.0.0.1:8000/api';
+  private apiUrl = 'http://localhost/ess-backend/public/api';
 
   constructor(private http: HttpClient, private router: Router) {
     this.isLoggedIn();
@@ -45,7 +45,6 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
 
       const headers = new HttpHeaders().set('Content-Type', 'application/json');
 

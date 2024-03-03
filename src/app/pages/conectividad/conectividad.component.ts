@@ -66,7 +66,7 @@ export interface ConectityElements {
   templateUrl: './conectividad.component.html',
   styleUrl: './conectividad.component.css',
 })
-export class ConectividadComponent implements MatPaginatorIntl, OnDestroy{
+export class ConectividadComponent implements MatPaginatorIntl{
   // MatPaginatorIntl
   changes = new Subject<void>();
   firstPageLabel = $localize`Primera Página`;
@@ -74,6 +74,11 @@ export class ConectividadComponent implements MatPaginatorIntl, OnDestroy{
   lastPageLabel = $localize`Última Página`;
   nextPageLabel = 'Siguiente Página';
   previousPageLabel = 'Página Anterior';
+
+  public baseUrl = 'http://localhost/ess-backend/public/';
+  public conectividadUrl = 'http://localhost/ess-backend/public/api/conectividad';
+
+
   getRangeLabel(page: number, pageSize: number, length: number): string {
     if (length === 0) {
       return $localize`Página 1 de 1`;
@@ -110,9 +115,7 @@ export class ConectividadComponent implements MatPaginatorIntl, OnDestroy{
     'Aprobado Por',
   ];
 
-  ngOnDestroy(): void {
-    this.menuSubscription.unsubscribe();
-  }
+
 
   dataSource: any;
   user: any;
@@ -129,10 +132,8 @@ export class ConectividadComponent implements MatPaginatorIntl, OnDestroy{
   CPEMax: any = [];
   CPSMax: any = [];
   fechas: any = [];
-  private menuSubscription: Subscription;
-  public hasClickedMenu: boolean = true;
-  public baseUrl = 'http://127.0.0.1:8000';
-  private conectividadUrl = 'http://127.0.0.1:8000/api/conectividad';
+
+
   conectsForm = new FormGroup({
     estado_conectate: new FormControl('', [Validators.required]),
     velocidad_conectate: new FormControl('', [Validators.required]),
@@ -170,9 +171,6 @@ export class ConectividadComponent implements MatPaginatorIntl, OnDestroy{
       error: (error) => {
         console.log(error.error.error);
       },
-    });
-    this.menuSubscription = this.service.menuClick$.subscribe(() => {
-      this.hasClickedMenu = !this.hasClickedMenu;
     });
 
     this.conectsForm.get('alertas_graves')?.valueChanges.subscribe(() => {
@@ -232,8 +230,6 @@ export class ConectividadComponent implements MatPaginatorIntl, OnDestroy{
               const dateB: Date = new Date(b.created_at);
               return dateB.getTime() - dateA.getTime();
             });
-
-            this.dataPoolService.setDataPools(res);
             this.dataSource = new MatTableDataSource<ConectityElements>(
               ELEMENT_DATA
             );
@@ -333,12 +329,14 @@ export class ConectividadComponent implements MatPaginatorIntl, OnDestroy{
               this.conectsForm.reset();
               this.modal = false;
               this.GetConectitys();
+              console.log(res);
+              
               if(this.user.correo == 'auxsistemas@banasan.com.co'){
                 this.service.postNotificacion('../../../assets/axel.png', this.user.name, 'ha agregado un nuevo registro de Conectividad').subscribe({
                   next: (res) => {
                     this.service.getNotificaciones().subscribe({
                       next: (res) => {
-                        this.dataPoolService.updateData(res.slice().reverse());
+                        console.log(res);
                       },
                       error: (error) => {
                         console.error(error.error.error);  
@@ -354,7 +352,8 @@ export class ConectividadComponent implements MatPaginatorIntl, OnDestroy{
                   next: (res) => {
                     this.service.getNotificaciones().subscribe({
                       next: (res) => {
-                        this.dataPoolService.updateData(res);
+                        console.log(res);
+                        
                       },
                       error: (error) => {
                         console.error(error.error.error);  

@@ -6,7 +6,7 @@
     <title>ESS - HOME</title>
   </head>
   <body>
-    <header [ngClass]="{'header' : !hasClickedMenu, 'headerReduce' : hasClickedMenu}">
+    <header class="header">
       <div class="LogoHeader">
         <img src="../../../assets/LogoBanasanWhite.png" alt="Logo Banasan" />
       </div>
@@ -82,7 +82,7 @@
       </div>
     </header>
 
-    <div [ngClass]="{'derecho': !hasClickedMenu, 'derechoReduce': hasClickedMenu }">
+    <div class="derecho">
       <div class="headers">
         @if (data) {
          <app-header [notificaciones]="notificaciones"></app-header>

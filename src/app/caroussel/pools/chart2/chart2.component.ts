@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ChartComponent, NgApexchartsModule } from 'ng-apexcharts';
 import { DataPoolService } from '../../../services/data-pool.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { EncryptService } from '../../../services/encrypt.service';
 
 type ChartOptions = {
   series: any;
@@ -26,21 +28,40 @@ export class Chart2Component{
   contAprobado = 0;
   estado: any;
 
-  constructor(private dataPoolService: DataPoolService) {
-    this.dataPoolService.dataPools$.subscribe((data) => {
-      this.contAprobado=0;
-      this.contPendiente=0;
-      for (const item of data) {
-        if (item.aprobado_por) {
-          this.contAprobado++;
-        } else {
-          this.contPendiente++;
-        }
-      }
+  constructor(private dataPoolService: DataPoolService, private service: EncryptService, private http: HttpClient) {
+    this.GetPools();
+  }
+
+  GetPools() {
+    const authToken = this.service.getDecryptedToken();
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
     });
-    setTimeout(() => {
-      this.generateChart();
-    }, 1000)
+
+    this.http.get<any>('http://localhost/ess-backend/public/api/pool', { headers })
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            this.data = res;
+            for (const item of this.data) {
+              if (item.aprobado_por) {
+                this.contAprobado++;
+              } else {
+                this.contPendiente++;
+              }
+            }
+            setTimeout(() => {
+              this.generateChart();
+            }, 1000)
+            
+          }
+        },
+        error: (error) => {
+          console.log(error.error);
+        },
+      });
   }
 
   generateChart(){

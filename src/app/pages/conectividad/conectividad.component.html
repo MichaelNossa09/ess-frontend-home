@@ -1,9 +1,4 @@
-<div
-  [ngClass]="{
-    'contenedor-conect': !hasClickedMenu,
-    'contenedor-conectReduce': hasClickedMenu
-  }"
->
+<div class="contenedor-conect">
   <div class="conect">
     @if (modal) {
     <div class="button">
@@ -356,7 +351,7 @@
           <th mat-header-cell *matHeaderCellDef>Verificación 1</th>
           <td mat-cell *matCellDef="let element">
             <img
-              src="{{ baseUrl + '/' + 'storage' + '/' + element.v_fisica_1 }} "
+              src="{{'https://banasanitss.s3.us-east-2.amazonaws.com/'+element.v_fisica_1}}"
               alt=""
             />
           </td>
@@ -366,7 +361,7 @@
           <th mat-header-cell *matHeaderCellDef>Verificación 2</th>
           <td mat-cell *matCellDef="let element">
             <img
-              src="{{ baseUrl + '/' + 'storage' + '/' + element.v_fisica_2 }} "
+              src="{{'https://banasanitss.s3.us-east-2.amazonaws.com/'+element.v_fisica_2}} "
               alt=""
             />
           </td>

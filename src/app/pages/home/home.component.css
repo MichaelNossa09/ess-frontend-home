@@ -97,110 +97,6 @@
 
 
 
-
-.headerReduce{
-    display: flex;
-    flex-flow: column;
-    position: fixed;
-    width: 5%;
-    height: 100vh;
-    background-color: #17202A;
-    transition: all .3s;
-}
-.headerReduce .LogoHeader{
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    margin-top: 30px;
-    margin-bottom: 50px;
-}
-.headerReduce .LogoHeader img{
-    width: 100%;
-    height: 60px;
-    object-fit: contain;
-    padding: 0 10px;
-    cursor: pointer;
-}
-.headerReduce .logout{
-    display: flex;
-    align-items: center;
-}
-.headerReduce .items{
-    display: flex;
-    flex-flow: column;
-    border-radius: 5px;
-    margin: 0;
-    width: 100%;
-    padding: 10px;
-}
-.headerReduce .items .item:hover{
-    background-color: #F1C40F;
-    transition: .3s;
-}
-
-.headerReduce .items:last-of-type{
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-}
-.headerReduce .items:last-of-type button{
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    border-radius: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    font-size: 14px;
-}
-.headerReduce .items:last-of-type button:hover{
-    background-color: rgb(223, 125, 127);
-    transition: .2s;
-}
-.headerReduce .items:last-of-type button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.headerReduce .items:last-of-type button svg{
-    margin: 0;
-}
-.headerReduce .items:last-of-type button h5{
-    display: none;
-}
-.headerReduce .items .item{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.headerReduce .items .item.active{
-    background-color: #F1C40F;
-}
-.headerReduce .items .item svg{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    fill: #F8F9F9;
-    margin: 0;
-
-}
-
-.headerReduce .items .item h5{
-    display: none;
-}
-.derechoReduce{
-    display: flex;
-    flex-flow: column;
-    width: 100%;
-}
-
-
 @media (max-width: 1180px) {
     .header .LogoHeader img{
         max-width: 90%;
@@ -214,9 +110,6 @@
 }
 
 @media (max-width: 1080px) {
-    .headerReduce{
-        width: 15%;
-    }
     .header .LogoHeader img{
         max-width: 90%;
     }

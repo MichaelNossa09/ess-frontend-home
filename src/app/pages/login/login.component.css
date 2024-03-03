@@ -57,6 +57,10 @@ header .LogoHeader img{
     height: 80px;
 }
 
+.container-login .parte-superior-login span{
+    font-weight: 500;
+    color: rgb(101, 194, 194);
+}
 
 .container-login .parte-superior-login h5{
     font-size: 20px;

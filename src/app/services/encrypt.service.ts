@@ -6,10 +6,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EncryptService {
-  private apiUrl = 'http://127.0.0.1:8000/api';
+  private apiUrl = 'http://localhost/ess-backend/public/api';
   constructor(private http: HttpClient) { }
-  private menuClickSubject = new BehaviorSubject<boolean>(false);
-  menuClick$ = this.menuClickSubject.asObservable();
   getDecryptedToken(): string | null {
     const encryptedToken = localStorage.getItem('tk');
     if (encryptedToken) {
@@ -34,9 +32,6 @@ export class EncryptService {
     return null;
   }
 
-  toggleMenu() {
-    this.menuClickSubject.next(true);
-  }
 
 
   getUser(): Observable<any>{
