@@ -37,7 +37,7 @@ export class HomeComponent{
     });
   }
 
-  private apiUrl = 'http://localhost/ess-backend/public/api';
+  private apiUrl = 'http://ess:8090/api';
   data: any;
   vista: string = 'Pools & Eventos';
 

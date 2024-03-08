@@ -63,7 +63,7 @@
   align-items: center;
 }
 .modalPool form .divPoolA h5{
-  font-size: 20px;
+  font-size: 16px;
   width: 100%;
   text-align: center;
   padding: 5px 0;
@@ -71,6 +71,7 @@
   margin-bottom: 10px;
   color: #F1C40F;
   font-weight: 400;
+  text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.2);
 }
 .modalPool form .divPoolA .divPoolAFirst{
   display: flex;
@@ -88,27 +89,27 @@
 .modalPool form .divPoolA .divPoolAFirst label{
   margin-bottom: 5px;
   pointer-events: none;
-  font-size: 16px;
+  font-size: 14px;
 }
 .modalPool form .divPoolA .divPoolAFirst input{
   outline: none;
   border: none;
   border-bottom: 2px solid #F1C40F;
   padding: 5px;
-  font-size: 16px;
+  font-size: 14px;
   background-color: transparent;
 }
 .modalPool form .divPoolA .divPoolASecond label{
   margin-bottom: 5px;
   pointer-events: none;
-  font-size: 16px;
+  font-size: 14px;
 }
 .modalPool form .divPoolA .divPoolASecond input{
   outline: none;
   border: none;
   border-bottom: 2px solid #F1C40F;
   padding: 5px;
-  font-size: 16px;
+  font-size: 14px;
   background-color: transparent;
 }
 .modalPool form .divPoolB{
@@ -119,7 +120,7 @@
   align-items: center;
 }
 .modalPool form .divPoolB h5{
-  font-size: 20px;
+  font-size: 16px;
   width: 100%;
   text-align: center;
   padding: 5px 0;
@@ -127,6 +128,7 @@
   margin-bottom: 10px;
   color: rgb(52, 101, 117);
   font-weight: 400;
+  text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.2);
 }
 .modalPool form .divPoolB .divPoolBFirst{
   display: flex;
@@ -144,20 +146,20 @@
 .modalPool form .divPoolB .divPoolBFirst label{
   margin-bottom: 5px;
   pointer-events: none;
-  font-size: 16px;
+  font-size: 14px;
 }
 .modalPool form .divPoolB .divPoolBFirst input{
   outline: none;
   border: none;
   border-bottom: 2px solid rgb(52, 101, 117)  ;
   padding: 5px;
-  font-size: 16px;
+  font-size: 14px;
   background-color: transparent;
 }
 .modalPool form .divPoolB .divPoolBSecond label{
   margin-bottom: 5px;
   pointer-events: none;
-  font-size: 16px;
+  font-size: 14px;
 }
 .modalPool form .divPoolB .divPoolBSecond input{
   outline: none;
@@ -175,7 +177,6 @@
 .modalPool form .v_fisica .v_fisica_1{
   display: flex;
   flex-flow: column;
-  border: 1px solid #F1C40F;
   border-radius: 10px;
   padding: 10px;
   width: 40%;
@@ -186,16 +187,42 @@
   text-transform: uppercase;
   font-size: 14px;
   text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F8F9F9;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0px 0px 10px #F1C40F;
+  margin: 5px auto;
+}
+.modalPool form .v_fisica .v_fisica_1 label:hover{
+  transform: translateY(-5px);
+  transition: .3s ease;
+}
+.modalPool form .v_fisica .v_fisica_1 label svg{
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
 }
 .modalPool form .v_fisica .v_fisica_1 input{
   border-radius: 10px;
   background-color: #F8F9F9;
   padding: 5px;
+  display: none;
+}
+
+.modalPool form .v_fisica .v_fisica_2 label svg{
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
 }
 .modalPool form .v_fisica .v_fisica_2{
   display: flex;
   flex-flow: column;
-  border: 1px solid rgb(52, 101, 117);
   border-radius: 10px;
   padding: 10px;
   width: 40%;
@@ -204,32 +231,62 @@
 .modalPool form .v_fisica .v_fisica_2 label{
   margin-bottom: 5px;
   text-transform: uppercase;
-  text-align: center;
   font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F8F9F9;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0px 0px 10px rgb(52, 101, 117);
+  margin: 5px auto;
+}
+.modalPool form .v_fisica .v_fisica_2 label:hover{
+  transform: translateY(-5px);
+  transition: .3s ease;
 }
 .modalPool form .v_fisica .v_fisica_2 input{
   border-radius: 10px;
   background-color: #F8F9F9;
   padding: 5px;
+  display: none;
 }
 .modalPool form .v_fisica .v_fisica_1 .img_v_fisica_1{
   display: flex;
-  width: 100%;
+  width: 200px;
+  margin: 10px auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
   justify-content: center;
+  margin-top: 10px;
+  background-color: #F8F9F9;
 }
 .modalPool form .v_fisica .v_fisica_1 .img_v_fisica_1 img{
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  max-height: 200px;
+  border-radius: 10px;
   object-fit: contain;
 }
 .modalPool form .v_fisica .v_fisica_2 .img_v_fisica_2{
   display: flex;
-  width: 100%;
+  width: 200px;
+  margin: 10px auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
   justify-content: center;
+  margin-top: 10px;
+  background-color: #F8F9F9;
 }
 .modalPool form .v_fisica .v_fisica_2 .img_v_fisica_2 img{
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  max-height: 200px;
+  border-radius: 10px;
   object-fit: contain;
 }
 .modalPool form .submit{
@@ -252,7 +309,7 @@
   color: #F8F9F9;
   transition: .3  s;
 }
-.alert-success{
+.alert-success, .alert-success-aprob{
   display: flex;
   position: absolute;
   bottom: 40px;
@@ -264,11 +321,11 @@
   transform: translateX(-100px);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
-.alert-success.show {
+.alert-success.show, .alert-success-aprob.show {
   opacity: 1;
   transform: translateY(0);
 }
-.alert-success h5{
+.alert-success h5, .alert-success-aprob h5{
   display: flex;
   align-items: center;
   width: 100%;
@@ -280,12 +337,14 @@
   border: 2px solid rgba(0, 0, 0, 1);
   border-radius: 2em 0.1cqb;
   background-color: rgb(37, 236, 169);
+  text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.2);
 }
-.alert-success h5 svg{
+.alert-success h5 svg, .alert-success-aprob h5 svg{
   margin-left: 10px;
   width: 30px;
   height: 30px;
   fill: rgba(0, 0, 0, 0.9);
+  text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.2);
 }
 .contenedor-pool .charts{
   display: flex;

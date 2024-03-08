@@ -100,7 +100,6 @@ export class PoolsComponent implements MatPaginatorIntl {
   pools: any = [];
   modal: boolean = false;
   user: any;
-  success: boolean = true;
   public archivo1: any;
   public archivo2: any;
   public previsualizacion: string;
@@ -123,8 +122,8 @@ export class PoolsComponent implements MatPaginatorIntl {
 
   isAdmin = false;
 
-  public baseUrl = 'http://localhost/ess-backend/public/';
-  public poolsUrl = 'http://localhost/ess-backend/public/api/pool';
+  public baseUrl = 'http://ess:8090/';
+  public poolsUrl = 'http://ess:8090/api/pool';
 
 
   constructor(
@@ -142,7 +141,7 @@ export class PoolsComponent implements MatPaginatorIntl {
         this.GetPools();
       },
       error: (error) => {
-        console.log(error);
+        console.error(error);
       },
     });
   }
@@ -172,8 +171,11 @@ export class PoolsComponent implements MatPaginatorIntl {
                 next: (res) => {
                   this.service.getNotificaciones().subscribe({
                     next: (res) => {
-                      console.log('Registro aprobado exitosamente');
-                      
+                      document.querySelector('.alert-success-aprob')?.classList.add('show');
+                      setTimeout(function() {
+                        document.querySelector('.alert-success-aprob')?.classList.remove('show');
+                      }, 3000);
+                    
                     },
                     error: (error) => {
                       console.log(error.error.error);
@@ -204,7 +206,7 @@ export class PoolsComponent implements MatPaginatorIntl {
       Authorization: `Bearer ${authToken}`,
     });
 
-    this.http.get<PeriodicElement[]>('http://localhost/ess-backend/public/api/pool', { headers })
+    this.http.get<PeriodicElement[]>('http://ess:8090/api/pool', { headers })
       .subscribe({
         next: (res) => {
           if (res) {

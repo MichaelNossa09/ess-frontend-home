@@ -26,7 +26,7 @@ export class LoginComponent {
     ]),
   });
 
-  private apiUrl = 'http://localhost/ess-backend/public/api';
+  private apiUrl = 'http://ess:8090/api';
 
   constructor(private http: HttpClient, private router: Router) {
     this.isLoggedIn();

@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EncryptService {
-  private apiUrl = 'http://localhost/ess-backend/public/api';
+  private apiUrl = 'http://ess:8090/api';
   constructor(private http: HttpClient) { }
   getDecryptedToken(): string | null {
     const encryptedToken = localStorage.getItem('tk');

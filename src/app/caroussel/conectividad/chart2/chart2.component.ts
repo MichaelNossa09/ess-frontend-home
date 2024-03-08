@@ -29,10 +29,10 @@ export class Chart2Component{
   estado: any;
 
   constructor(private dataPoolService: DataPoolService, private service: EncryptService, private http: HttpClient) {
-    this.GetPools();
+    this.GetConectitys();
   }
 
-  GetPools() {
+  GetConectitys() {
     const authToken = this.service.getDecryptedToken();
 
     const headers = new HttpHeaders({
@@ -40,7 +40,7 @@ export class Chart2Component{
       Authorization: `Bearer ${authToken}`,
     });
 
-    this.http.get<any>('http://ess:8090/api/pool', { headers })
+    this.http.get<any>('http://ess:8090/api/conectividad', { headers })
       .subscribe({
         next: (res) => {
           if (res) {

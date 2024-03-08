@@ -21,7 +21,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { DataPoolService } from '../../services/data-pool.service';
-import { Chart2Component } from '../../caroussel/pools/chart2/chart2.component';
+import { Chart2Component } from '../../caroussel/conectividad/chart2/chart2.component';
 import { Chart1Component } from '../../caroussel/conectividad/chart1/chart1.component';
 
 export interface ConectityElements {
@@ -75,8 +75,12 @@ export class ConectividadComponent implements MatPaginatorIntl{
   nextPageLabel = 'Siguiente Página';
   previousPageLabel = 'Página Anterior';
 
-  public baseUrl = 'http://localhost/ess-backend/public/';
-  public conectividadUrl = 'http://localhost/ess-backend/public/api/conectividad';
+  public baseUrl = 'http://ess:8090/';
+  public conectividadUrl = 'http://ess:8090/api/conectividad';
+
+
+  
+  isAdmin = false;
 
 
   getRangeLabel(page: number, pageSize: number, length: number): string {
@@ -126,7 +130,6 @@ export class ConectividadComponent implements MatPaginatorIntl{
   public previsualizacion: string;
   public previsualizacion2: string;
   modal: boolean = false;
-  success = true;
   IPEMax: any = [];
   IPSMax: any = [];
   CPEMax: any = [];
@@ -163,13 +166,16 @@ export class ConectividadComponent implements MatPaginatorIntl{
     private http: HttpClient,
     private sanitizer: DomSanitizer,
     private dataPoolService: DataPoolService) {
-    this.service.getUser().subscribe({
+   this.service.getUser().subscribe({
       next: (res) => {
         this.user = res.data;
+        if (this.user.rol == 'Admin') {
+          this.isAdmin = true;
+        }
         this.GetConectitys();
       },
       error: (error) => {
-        console.log(error.error.error);
+        console.error(error);
       },
     });
 
@@ -194,6 +200,57 @@ export class ConectividadComponent implements MatPaginatorIntl{
 
     this.conectsForm.get('alertas_totales')?.setValue(alertasTotales);
   }
+
+
+  aprobar(element: any) {
+    const authToken = this.service.getDecryptedToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    });
+    const requestBody = {
+      aprobado_por: this.user.name
+    };
+    
+    this.http.put<any>(`${this.conectividadUrl}/${element.id}`, requestBody, { headers }).subscribe({
+      next: (res) => {
+        if (res) {
+          this.GetConectitys();
+          if (this.user.correo == 'seguridadinformatica@banasan.com.co') {
+            this.service
+              .postNotificacion(
+                '../../../assets/Jersson.jpg',
+                this.user.name,
+                'Ha aprobado un registro de Conectividad'
+              )
+              .subscribe({
+                next: (res) => {
+                  this.service.getNotificaciones().subscribe({
+                    next: (res) => {
+                      document.querySelector('.alert-success-aprob')?.classList.add('show');
+                      setTimeout(function() {
+                        document.querySelector('.alert-success-aprob')?.classList.remove('show');
+                      }, 3000);
+                    },
+                    error: (error) => {
+                      console.log(error.error.error);
+                    },
+                  });
+                },
+                error: (error) => {
+                  console.log(error.error.error);
+                },
+              });
+          }
+        }
+      },
+      error: (error) => {
+        console.log(error.error);
+      },
+    });
+  }
+
+
 
   GetConectitys() {
     const authToken = this.service.getDecryptedToken();
@@ -327,10 +384,7 @@ export class ConectividadComponent implements MatPaginatorIntl{
           next: (res) => {
             if (res) {
               this.conectsForm.reset();
-              this.modal = false;
-              this.GetConectitys();
-              console.log(res);
-              
+              this.GetConectitys();            
               if(this.user.correo == 'auxsistemas@banasan.com.co'){
                 this.service.postNotificacion('../../../assets/axel.png', this.user.name, 'ha agregado un nuevo registro de Conectividad').subscribe({
                   next: (res) => {
