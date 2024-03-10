@@ -311,7 +311,7 @@
 }
 .alert-success, .alert-success-aprob{
   display: flex;
-  position: absolute;
+  position: fixed;
   bottom: 40px;
   right: 40px;
   width: 300px;
@@ -417,10 +417,11 @@
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 .contenedor-pool .table table img{
-  width: 100%;
+  width: 10 0px;
   height: 100%;
   cursor: pointer;
   object-fit: contain;
+  border-radius: 10px;
 }
 
 @media (max-width: 1080px) {

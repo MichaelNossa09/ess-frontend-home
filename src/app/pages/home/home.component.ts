@@ -39,7 +39,7 @@ export class HomeComponent{
 
   private apiUrl = 'http://ess:8090/api';
   data: any;
-  vista: string = 'Pools & Eventos';
+  vista: string = 'Estatus';
 
   GetUser() {
     const authToken = this.service.getDecryptedToken();
