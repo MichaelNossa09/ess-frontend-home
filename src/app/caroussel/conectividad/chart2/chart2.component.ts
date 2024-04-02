@@ -16,19 +16,21 @@ type ChartOptions = {
   standalone: true,
   imports: [NgApexchartsModule],
   templateUrl: './chart2.component.html',
-  styleUrl: './chart2.component.css'
+  styleUrl: './chart2.component.css',
 })
-
-export class Chart2Component{
-
-  @ViewChild("chart2") chart: ChartComponent;
+export class Chart2Component {
+  @ViewChild('chart2') chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   data: any;
   contPendiente = 0;
   contAprobado = 0;
   estado: any;
 
-  constructor(private dataPoolService: DataPoolService, private service: EncryptService, private http: HttpClient) {
+  constructor(
+    private dataPoolService: DataPoolService,
+    private service: EncryptService,
+    private http: HttpClient
+  ) {
     this.GetConectitys();
   }
 
@@ -40,7 +42,11 @@ export class Chart2Component{
       Authorization: `Bearer ${authToken}`,
     });
 
-    this.http.get<any>('http://ess:8090/api/conectividad', { headers })
+    this.http
+      .get<any>(
+        'https://controlriesgos.banasan.com.co:8091/itss/conectividad',
+        { headers }
+      )
       .subscribe({
         next: (res) => {
           if (res) {
@@ -54,8 +60,7 @@ export class Chart2Component{
             }
             setTimeout(() => {
               this.generateChart();
-            }, 1000)
-            
+            }, 1000);
           }
         },
         error: (error) => {
@@ -64,27 +69,27 @@ export class Chart2Component{
       });
   }
 
-  generateChart(){
+  generateChart() {
     this.chartOptions = {
       series: [this.contAprobado, this.contPendiente],
       chart: {
         width: 380,
-        type: "pie"
+        type: 'pie',
       },
-      labels: ["Aprobados", "Pendientes"],
+      labels: ['Aprobados', 'Pendientes'],
       responsive: [
         {
           breakpoint: 480,
           options: {
             chart: {
-              width: 200
+              width: 200,
             },
             legend: {
-              position: "bottom"
-            }
-          }
-        }
-      ]
+              position: 'bottom',
+            },
+          },
+        },
+      ],
     };
   }
 }

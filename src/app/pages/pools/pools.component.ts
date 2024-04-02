@@ -122,9 +122,8 @@ export class PoolsComponent implements MatPaginatorIntl {
 
   isAdmin = false;
 
-  public baseUrl = 'http://ess:8090/';
-  public poolsUrl = 'http://ess:8090/api/pool';
-
+  public baseUrl = 'https://controlriesgos.banasan.com.co:8091/itss';
+  public poolsUrl = 'https://controlriesgos.banasan.com.co:8091/itss/pool';
 
   constructor(
     private http: HttpClient,
@@ -153,46 +152,51 @@ export class PoolsComponent implements MatPaginatorIntl {
       Authorization: `Bearer ${authToken}`,
     });
     const requestBody = {
-      aprobado_por: this.user.name
+      aprobado_por: this.user.name,
     };
-    
-    this.http.put<any>(`${this.poolsUrl}/${element.id}`, requestBody, { headers }).subscribe({
-      next: (res) => {
-        if (res) {
-          this.GetPools();
-          if (this.user.correo == 'seguridadinformatica@banasan.com.co') {
-            this.service
-              .postNotificacion(
-                '../../../assets/Jersson.jpg',
-                this.user.name,
-                'Ha aprobado un registro de Pools'
-              )
-              .subscribe({
-                next: (res) => {
-                  this.service.getNotificaciones().subscribe({
-                    next: (res) => {
-                      document.querySelector('.alert-success-aprob')?.classList.add('show');
-                      setTimeout(function() {
-                        document.querySelector('.alert-success-aprob')?.classList.remove('show');
-                      }, 3000);
-                    
-                    },
-                    error: (error) => {
-                      console.log(error.error.error);
-                    },
-                  });
-                },
-                error: (error) => {
-                  console.log(error.error.error);
-                },
-              });
+
+    this.http
+      .put<any>(`${this.poolsUrl}/${element.id}`, requestBody, { headers })
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            this.GetPools();
+            if (this.user.correo == 'seguridadinformatica@banasan.com.co') {
+              this.service
+                .postNotificacion(
+                  '../../../assets/Jersson.jpg',
+                  this.user.name,
+                  'Ha aprobado un registro de Pools'
+                )
+                .subscribe({
+                  next: (res) => {
+                    this.service.getNotificaciones().subscribe({
+                      next: (res) => {
+                        document
+                          .querySelector('.alert-success-aprob')
+                          ?.classList.add('show');
+                        setTimeout(function () {
+                          document
+                            .querySelector('.alert-success-aprob')
+                            ?.classList.remove('show');
+                        }, 3000);
+                      },
+                      error: (error) => {
+                        console.log(error.error.error);
+                      },
+                    });
+                  },
+                  error: (error) => {
+                    console.log(error.error.error);
+                  },
+                });
+            }
           }
-        }
-      },
-      error: (error) => {
-        console.log(error.error);
-      },
-    });
+        },
+        error: (error) => {
+          console.log(error.error);
+        },
+      });
   }
 
   GetPools() {
@@ -206,7 +210,11 @@ export class PoolsComponent implements MatPaginatorIntl {
       Authorization: `Bearer ${authToken}`,
     });
 
-    this.http.get<PeriodicElement[]>('http://ess:8090/api/pool', { headers })
+    this.http
+      .get<PeriodicElement[]>(
+        'https://controlriesgos.banasan.com.co:8091/itss/pool',
+        { headers }
+      )
       .subscribe({
         next: (res) => {
           if (res) {
@@ -317,7 +325,7 @@ export class PoolsComponent implements MatPaginatorIntl {
               if (res) {
                 this.poolsForm.reset();
                 console.log(res);
-                
+
                 this.modal = false;
                 this.GetPools();
                 if (this.user.correo == 'auxsistemas@banasan.com.co') {
@@ -338,7 +346,7 @@ export class PoolsComponent implements MatPaginatorIntl {
                           },
                         });
                       },
-                      error: (error) => { 
+                      error: (error) => {
                         console.log(error.error);
                       },
                     });

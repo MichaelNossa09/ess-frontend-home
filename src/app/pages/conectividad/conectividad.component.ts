@@ -66,7 +66,7 @@ export interface ConectityElements {
   templateUrl: './conectividad.component.html',
   styleUrl: './conectividad.component.css',
 })
-export class ConectividadComponent implements MatPaginatorIntl{
+export class ConectividadComponent implements MatPaginatorIntl {
   // MatPaginatorIntl
   changes = new Subject<void>();
   firstPageLabel = $localize`Primera Página`;
@@ -75,13 +75,11 @@ export class ConectividadComponent implements MatPaginatorIntl{
   nextPageLabel = 'Siguiente Página';
   previousPageLabel = 'Página Anterior';
 
-  public baseUrl = 'http://ess:8090/';
-  public conectividadUrl = 'http://ess:8090/api/conectividad';
+  public baseUrl = 'https://controlriesgos.banasan.com.co:8091/itss';
+  public conectividadUrl =
+    'https://controlriesgos.banasan.com.co:8091/itss/conectividad';
 
-
-  
   isAdmin = false;
-
 
   getRangeLabel(page: number, pageSize: number, length: number): string {
     if (length === 0) {
@@ -119,8 +117,6 @@ export class ConectividadComponent implements MatPaginatorIntl{
     'Aprobado Por',
   ];
 
-
-
   dataSource: any;
   user: any;
   conectividades: any;
@@ -136,7 +132,6 @@ export class ConectividadComponent implements MatPaginatorIntl{
   CPSMax: any = [];
   fechas: any = [];
 
-
   conectsForm = new FormGroup({
     estado_conectate: new FormControl('', [Validators.required]),
     velocidad_conectate: new FormControl('', [Validators.required]),
@@ -149,7 +144,9 @@ export class ConectividadComponent implements MatPaginatorIntl{
     alertas_menores: new FormControl(0, [Validators.required]),
     observaciones_menores: new FormControl('Ninguna', [Validators.required]),
     alertas_totales: new FormControl(0, [Validators.required]),
-    informacion_workspace: new FormControl('Sin Novedades', [Validators.required]),
+    informacion_workspace: new FormControl('Sin Novedades', [
+      Validators.required,
+    ]),
     pico_entrante_max_itelkom: new FormControl(null, [Validators.required]),
     pico_salida_max_itelkom: new FormControl('', [Validators.required]),
     pico_entrante_max_conectate: new FormControl(null, [Validators.required]),
@@ -165,8 +162,9 @@ export class ConectividadComponent implements MatPaginatorIntl{
     private service: EncryptService,
     private http: HttpClient,
     private sanitizer: DomSanitizer,
-    private dataPoolService: DataPoolService) {
-   this.service.getUser().subscribe({
+    private dataPoolService: DataPoolService
+  ) {
+    this.service.getUser().subscribe({
       next: (res) => {
         this.user = res.data;
         if (this.user.rol == 'Admin') {
@@ -191,7 +189,7 @@ export class ConectividadComponent implements MatPaginatorIntl{
       this.actualizarAlertasTotales();
     });
   }
-  actualizarAlertasTotales(){
+  actualizarAlertasTotales() {
     const alertasGraves = this.conectsForm.get('alertas_graves')?.value ?? 0;
     const alertasMedias = this.conectsForm.get('alertas_medias')?.value ?? 0;
     const alertasMenores = this.conectsForm.get('alertas_menores')?.value ?? 0;
@@ -201,7 +199,6 @@ export class ConectividadComponent implements MatPaginatorIntl{
     this.conectsForm.get('alertas_totales')?.setValue(alertasTotales);
   }
 
-
   aprobar(element: any) {
     const authToken = this.service.getDecryptedToken();
     const headers = new HttpHeaders({
@@ -209,48 +206,54 @@ export class ConectividadComponent implements MatPaginatorIntl{
       Authorization: `Bearer ${authToken}`,
     });
     const requestBody = {
-      aprobado_por: this.user.name
+      aprobado_por: this.user.name,
     };
-    
-    this.http.put<any>(`${this.conectividadUrl}/${element.id}`, requestBody, { headers }).subscribe({
-      next: (res) => {
-        if (res) {
-          this.GetConectitys();
-          if (this.user.correo == 'seguridadinformatica@banasan.com.co') {
-            this.service
-              .postNotificacion(
-                '../../../assets/Jersson.jpg',
-                this.user.name,
-                'Ha aprobado un registro de Conectividad'
-              )
-              .subscribe({
-                next: (res) => {
-                  this.service.getNotificaciones().subscribe({
-                    next: (res) => {
-                      document.querySelector('.alert-success-aprob')?.classList.add('show');
-                      setTimeout(function() {
-                        document.querySelector('.alert-success-aprob')?.classList.remove('show');
-                      }, 3000);
-                    },
-                    error: (error) => {
-                      console.log(error.error.error);
-                    },
-                  });
-                },
-                error: (error) => {
-                  console.log(error.error.error);
-                },
-              });
+
+    this.http
+      .put<any>(`${this.conectividadUrl}/${element.id}`, requestBody, {
+        headers,
+      })
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            this.GetConectitys();
+            if (this.user.correo == 'seguridadinformatica@banasan.com.co') {
+              this.service
+                .postNotificacion(
+                  '../../../assets/Jersson.jpg',
+                  this.user.name,
+                  'Ha aprobado un registro de Conectividad'
+                )
+                .subscribe({
+                  next: (res) => {
+                    this.service.getNotificaciones().subscribe({
+                      next: (res) => {
+                        document
+                          .querySelector('.alert-success-aprob')
+                          ?.classList.add('show');
+                        setTimeout(function () {
+                          document
+                            .querySelector('.alert-success-aprob')
+                            ?.classList.remove('show');
+                        }, 3000);
+                      },
+                      error: (error) => {
+                        console.log(error.error.error);
+                      },
+                    });
+                  },
+                  error: (error) => {
+                    console.log(error.error.error);
+                  },
+                });
+            }
           }
-        }
-      },
-      error: (error) => {
-        console.log(error.error);
-      },
-    });
+        },
+        error: (error) => {
+          console.log(error.error);
+        },
+      });
   }
-
-
 
   GetConectitys() {
     const authToken = this.service.getDecryptedToken();
@@ -336,23 +339,43 @@ export class ConectividadComponent implements MatPaginatorIntl{
       });
       const formData = new FormData();
       const estado_conectate = this.conectsForm.get('estado_conectate')?.value;
-      const velocidad_conectate = this.conectsForm.get('velocidad_conectate')?.value;
+      const velocidad_conectate = this.conectsForm.get(
+        'velocidad_conectate'
+      )?.value;
       const estado_itelkom = this.conectsForm.get('estado_itelkom')?.value;
-      const velocidad_itelkom = this.conectsForm.get('velocidad_itelkom')?.value;
+      const velocidad_itelkom =
+        this.conectsForm.get('velocidad_itelkom')?.value;
       const alertas_graves = this.conectsForm.get('alertas_graves')?.value;
-      const observaciones_graves = this.conectsForm.get('observaciones_graves')?.value;
+      const observaciones_graves = this.conectsForm.get(
+        'observaciones_graves'
+      )?.value;
       const alertas_medias = this.conectsForm.get('alertas_medias')?.value;
-      const observaciones_medias = this.conectsForm.get('observaciones_medias')?.value;
+      const observaciones_medias = this.conectsForm.get(
+        'observaciones_medias'
+      )?.value;
       const alertas_menores = this.conectsForm.get('alertas_menores')?.value;
-      const observaciones_menores = this.conectsForm.get('observaciones_menores')?.value;
+      const observaciones_menores = this.conectsForm.get(
+        'observaciones_menores'
+      )?.value;
       const alertas_totales = this.conectsForm.get('alertas_totales')?.value;
-      const informacion_workspace = this.conectsForm.get('informacion_workspace')?.value;
-      const pico_entrante_max_itelkom = this.conectsForm.get('pico_entrante_max_itelkom')?.value;
-      const pico_salida_max_itelkom = this.conectsForm.get('pico_salida_max_itelkom')?.value;
-      const pico_entrante_max_conectate = this.conectsForm.get('pico_entrante_max_conectate')?.value;
-      const pico_salida_max_conectate = this.conectsForm.get('pico_salida_max_conectate')?.value;
-      const temperatura_datacenter = this.conectsForm.get('temperatura_datacenter')?.value;
-
+      const informacion_workspace = this.conectsForm.get(
+        'informacion_workspace'
+      )?.value;
+      const pico_entrante_max_itelkom = this.conectsForm.get(
+        'pico_entrante_max_itelkom'
+      )?.value;
+      const pico_salida_max_itelkom = this.conectsForm.get(
+        'pico_salida_max_itelkom'
+      )?.value;
+      const pico_entrante_max_conectate = this.conectsForm.get(
+        'pico_entrante_max_conectate'
+      )?.value;
+      const pico_salida_max_conectate = this.conectsForm.get(
+        'pico_salida_max_conectate'
+      )?.value;
+      const temperatura_datacenter = this.conectsForm.get(
+        'temperatura_datacenter'
+      )?.value;
 
       formData.append('estado_conectate', estado_conectate ?? '');
       formData.append('velocidad_conectate', velocidad_conectate ?? '');
@@ -366,62 +389,88 @@ export class ConectividadComponent implements MatPaginatorIntl{
       formData.append('observaciones_menores', observaciones_menores ?? '');
       formData.append('alertas_totales', alertas_totales?.toString() ?? '');
       formData.append('informacion_workspace', informacion_workspace ?? '');
-      formData.append('pico_entrante_max_itelkom', pico_entrante_max_itelkom ?? '');
+      formData.append(
+        'pico_entrante_max_itelkom',
+        pico_entrante_max_itelkom ?? ''
+      );
       formData.append('pico_salida_max_itelkom', pico_salida_max_itelkom ?? '');
-      formData.append('pico_entrante_max_conectate', pico_entrante_max_conectate ?? '');
-      formData.append('pico_salida_max_conectate', pico_salida_max_conectate ?? '');
-      formData.append('temperatura_datacenter', temperatura_datacenter?.toString() ?? '');
+      formData.append(
+        'pico_entrante_max_conectate',
+        pico_entrante_max_conectate ?? ''
+      );
+      formData.append(
+        'pico_salida_max_conectate',
+        pico_salida_max_conectate ?? ''
+      );
+      formData.append(
+        'temperatura_datacenter',
+        temperatura_datacenter?.toString() ?? ''
+      );
       formData.append('v_fisica_1', this.archivo1);
       formData.append('v_fisica_2', this.archivo2);
-      if(this.user){
+      if (this.user) {
         formData.append('registrado_por', this.user.name);
       }
 
-
-      
-      this.http.post<any>(`${this.conectividadUrl}`, formData, { headers })
+      this.http
+        .post<any>(`${this.conectividadUrl}`, formData, { headers })
         .subscribe({
           next: (res) => {
             if (res) {
               this.conectsForm.reset();
-              this.GetConectitys();            
-              if(this.user.correo == 'auxsistemas@banasan.com.co'){
-                this.service.postNotificacion('../../../assets/axel.png', this.user.name, 'ha agregado un nuevo registro de Conectividad').subscribe({
-                  next: (res) => {
-                    this.service.getNotificaciones().subscribe({
-                      next: (res) => {
-                        console.log(res);
-                      },
-                      error: (error) => {
-                        console.error(error.error.error);  
-                      }
-                    })
-                  },
-                  error: (error) => {
-                    console.error(error.error.error);
-                  }
-                })
-              }else if(this.user.correo == 'auxdesarrollo@agrobanacaribe.con'){
-                this.service.postNotificacion('../../../assets/michael.png', this.user.name, 'ha agregado un nuevo registro de Conectividad').subscribe({
-                  next: (res) => {
-                    this.service.getNotificaciones().subscribe({
-                      next: (res) => {
-                        console.log(res);
-                        
-                      },
-                      error: (error) => {
-                        console.error(error.error.error);  
-                      }
-                    })
-                  },
-                  error: (error) => {
-                    console.error(error.error.error);
-                  }
-                })
+              this.GetConectitys();
+              if (this.user.correo == 'auxsistemas@banasan.com.co') {
+                this.service
+                  .postNotificacion(
+                    '../../../assets/axel.png',
+                    this.user.name,
+                    'ha agregado un nuevo registro de Conectividad'
+                  )
+                  .subscribe({
+                    next: (res) => {
+                      this.service.getNotificaciones().subscribe({
+                        next: (res) => {
+                          console.log(res);
+                        },
+                        error: (error) => {
+                          console.error(error.error.error);
+                        },
+                      });
+                    },
+                    error: (error) => {
+                      console.error(error.error.error);
+                    },
+                  });
+              } else if (
+                this.user.correo == 'auxdesarrollo@agrobanacaribe.con'
+              ) {
+                this.service
+                  .postNotificacion(
+                    '../../../assets/michael.png',
+                    this.user.name,
+                    'ha agregado un nuevo registro de Conectividad'
+                  )
+                  .subscribe({
+                    next: (res) => {
+                      this.service.getNotificaciones().subscribe({
+                        next: (res) => {
+                          console.log(res);
+                        },
+                        error: (error) => {
+                          console.error(error.error.error);
+                        },
+                      });
+                    },
+                    error: (error) => {
+                      console.error(error.error.error);
+                    },
+                  });
               }
               document.querySelector('.alert-success')?.classList.add('show');
-              setTimeout(function() {
-                document.querySelector('.alert-success')?.classList.remove('show');
+              setTimeout(function () {
+                document
+                  .querySelector('.alert-success')
+                  ?.classList.remove('show');
               }, 3000);
             }
           },

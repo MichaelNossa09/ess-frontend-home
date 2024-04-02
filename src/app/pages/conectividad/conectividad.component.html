@@ -23,117 +23,233 @@
         enctype="multipart/form-data"
       >
         <div class="data">
-            <div class="conectate">
-                <h5>ISP - CONECTATE</h5>
-                <div class="content">
-                    <div class="left">
-                        <div class="estado">
-                            <label for="c-estado">Estado</label>
-                            <select id="c-estado" formControlName="estado_conectate" name="estado_conectate" required>
-                                <option value="" disabled selected hidden>Selecciona un estado</option>
-                                <option value="Bueno">Bueno</option>
-                                <option value="Malo">Malo</option>
-                            </select>
-                        </div>
-                        <div class="velocidad">
-                            <label for="c-velocidad">Velocidad</label>
-                            <input type="text" id="c-velocidad" formControlName="velocidad_conectate" name="velocidad_conectate"   placeholder="Ingrese velocidad" required>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="c-pe">
-                            <label for="c-pe">PE - Máximo</label>
-                            <input type="text" id="c-pe" formControlName="pico_entrante_max_conectate" name="pico_entrante_max_conectate" placeholder="Ingrese PE-Max" required>
-                        </div>
-                        <div class="c-ps">
-                            <label for="c-ps">PS - Máximo</label>
-                            <input type="text" id="c-ps" formControlName="pico_salida_max_conectate" name="pico_salida_max_conectate" placeholder="Ingrese PS-Max" required>
-                        </div>
-                    </div>
+          <div class="conectate">
+            <h5>ISP - CONECTATE</h5>
+            <div class="content">
+              <div class="left">
+                <div class="estado">
+                  <label for="c-estado">Estado</label>
+                  <select
+                    id="c-estado"
+                    formControlName="estado_conectate"
+                    name="estado_conectate"
+                    required
+                  >
+                    <option value="" disabled selected hidden>
+                      Selecciona un estado
+                    </option>
+                    <option value="Bueno">Bueno</option>
+                    <option value="Malo">Malo</option>
+                  </select>
                 </div>
+                <div class="velocidad">
+                  <label for="c-velocidad">Velocidad</label>
+                  <input
+                    type="text"
+                    id="c-velocidad"
+                    formControlName="velocidad_conectate"
+                    name="velocidad_conectate"
+                    placeholder="Ingrese velocidad"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="right">
+                <div class="c-pe">
+                  <label for="c-pe">PE - Máximo</label>
+                  <input
+                    type="text"
+                    id="c-pe"
+                    formControlName="pico_entrante_max_conectate"
+                    name="pico_entrante_max_conectate"
+                    placeholder="Ingrese PE-Max"
+                    required
+                  />
+                </div>
+                <div class="c-ps">
+                  <label for="c-ps">PS - Máximo</label>
+                  <input
+                    type="text"
+                    id="c-ps"
+                    formControlName="pico_salida_max_conectate"
+                    name="pico_salida_max_conectate"
+                    placeholder="Ingrese PS-Max"
+                    required
+                  />
+                </div>
+              </div>
             </div>
+          </div>
 
-            <div class="itelkom">
-                <h5>ISP - ITELKOM</h5>
-                <div class="content">
-                    <div class="left">
-                        <div class="estado">
-                            <label for="i-estado">Estado</label>
-                            <select id="i-estado" formControlName="estado_itelkom" name="estado_itelkom" required>
-                                <option value="" disabled selected hidden>Selecciona un estado</option>
-                                <option value="Bueno">Bueno</option>
-                                <option value="Malo">Malo</option>
-                            </select>
-                        </div>
-                        <div class="velocidad">
-                            <label for="i-velocidad">Velocidad</label>
-                            <input type="text" id="i-velocidad" formControlName="velocidad_itelkom" name="velocidad_itelkom" placeholder="Ingrese velocidad" required>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="i-pe">
-                            <label for="i-pe">PE - Máximo</label>
-                            <input type="text" id="i-pe" formControlName="pico_entrante_max_itelkom" name="pico_entrante_max_itelkom" placeholder="Ingrese PE-Max" required>
-                        </div>
-                        <div class="i-ps">
-                            <label for="i-ps">PS - Máximo</label>
-                            <input type="text" id="i-ps" formControlName="pico_salida_max_itelkom" name="pico_salida_max_itelkom" placeholder="Ingrese PS-Max" required>
-                        </div>
-                    </div>
+          <div class="itelkom">
+            <h5>ISP - ITELKOM</h5>
+            <div class="content">
+              <div class="left">
+                <div class="estado">
+                  <label for="i-estado">Estado</label>
+                  <select
+                    id="i-estado"
+                    formControlName="estado_itelkom"
+                    name="estado_itelkom"
+                    required
+                  >
+                    <option value="" disabled selected hidden>
+                      Selecciona un estado
+                    </option>
+                    <option value="Bueno">Bueno</option>
+                    <option value="Malo">Malo</option>
+                  </select>
                 </div>
+                <div class="velocidad">
+                  <label for="i-velocidad">Velocidad</label>
+                  <input
+                    type="text"
+                    id="i-velocidad"
+                    formControlName="velocidad_itelkom"
+                    name="velocidad_itelkom"
+                    placeholder="Ingrese velocidad"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="right">
+                <div class="i-pe">
+                  <label for="i-pe">PE - Máximo</label>
+                  <input
+                    type="text"
+                    id="i-pe"
+                    formControlName="pico_entrante_max_itelkom"
+                    name="pico_entrante_max_itelkom"
+                    placeholder="Ingrese PE-Max"
+                    required
+                  />
+                </div>
+                <div class="i-ps">
+                  <label for="i-ps">PS - Máximo</label>
+                  <input
+                    type="text"
+                    id="i-ps"
+                    formControlName="pico_salida_max_itelkom"
+                    name="pico_salida_max_itelkom"
+                    placeholder="Ingrese PS-Max"
+                    required
+                  />
+                </div>
+              </div>
             </div>
+          </div>
         </div>
         <div class="alertas-workspace">
-            <div class="alertas">
-                <h5>ALERTAS</h5>
-                <div class="content">
-                    <div class="left">
-                        <div class="graves">
-                            <label for="graves">Graves</label>
-                            <input type="number" id="graves" formControlName="alertas_graves" name="alertas_graves"  required>
-                        </div>
-                        <div class="medias">
-                            <label for="medias">Medias</label>
-                            <input type="number" id="medias" formControlName="alertas_medias" name="alertas_medias" required>
-                        </div>
-                        <div class="menores">
-                            <label for="menores">Menores</label>
-                            <input type="number" id="menores" formControlName="alertas_menores" name="alertas_menores" required>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="obs-g">
-                            <label for="obs-g">Observaciones Graves</label>
-                            <input type="text" id="obs-g" formControlName="observaciones_graves" name="observaciones_graves" placeholder="Ingrese Observaciones Graves" required>
-                        </div>
-                        <div class="obs-med">
-                            <label for="obs-med">Observaciones Medias</label>
-                            <input type="text" id="obs-med" formControlName="observaciones_medias" name="observaciones_medias" placeholder="Ingrese Observaciones Medias" required>
-                        </div>
-                        <div class="obs-men">
-                            <label for="obs-men">Observaciones Menores</label>
-                            <input type="text" id="obs-men" formControlName="observaciones_menores" name="observaciones_menores" placeholder="Ingrese Observaciones Menores" required>
-                        </div>
-                    </div>
+          <div class="alertas">
+            <h5>ALERTAS</h5>
+            <div class="content">
+              <div class="left">
+                <div class="graves">
+                  <label for="graves">Graves</label>
+                  <input
+                    type="number"
+                    id="graves"
+                    formControlName="alertas_graves"
+                    name="alertas_graves"
+                    required
+                  />
                 </div>
+                <div class="medias">
+                  <label for="medias">Medias</label>
+                  <input
+                    type="number"
+                    id="medias"
+                    formControlName="alertas_medias"
+                    name="alertas_medias"
+                    required
+                  />
+                </div>
+                <div class="menores">
+                  <label for="menores">Menores</label>
+                  <input
+                    type="number"
+                    id="menores"
+                    formControlName="alertas_menores"
+                    name="alertas_menores"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="right">
+                <div class="obs-g">
+                  <label for="obs-g">Observaciones Graves</label>
+                  <input
+                    type="text"
+                    id="obs-g"
+                    formControlName="observaciones_graves"
+                    name="observaciones_graves"
+                    placeholder="Ingrese Observaciones Graves"
+                    required
+                  />
+                </div>
+                <div class="obs-med">
+                  <label for="obs-med">Observaciones Medias</label>
+                  <input
+                    type="text"
+                    id="obs-med"
+                    formControlName="observaciones_medias"
+                    name="observaciones_medias"
+                    placeholder="Ingrese Observaciones Medias"
+                    required
+                  />
+                </div>
+                <div class="obs-men">
+                  <label for="obs-men">Observaciones Menores</label>
+                  <input
+                    type="text"
+                    id="obs-men"
+                    formControlName="observaciones_menores"
+                    name="observaciones_menores"
+                    placeholder="Ingrese Observaciones Menores"
+                    required
+                  />
+                </div>
+              </div>
             </div>
-            <div class="workspace">
-                <h5>WORKSPACE</h5>
-                <div class="workspace-div">
-                    <label for="wks">Información de Workspace</label>
-                    <textarea id="wks" formControlName="informacion_workspace" name="informacion_workspace" placeholder="Ingrese información de Workspace" required>
-                    </textarea>
-                </div>
-                <h5>DATACENTER</h5>
-                <div class="temp-div">
-                    <label for="temp">Temperatura</label>
-                    <input type="number" id="temp" formControlName="temperatura_datacenter" name="temperatura_datacenter" placeholder="Ingrese temperatura" required>
-                </div>
+          </div>
+          <div class="workspace">
+            <h5>WORKSPACE</h5>
+            <div class="workspace-div">
+              <label for="wks">Información de Workspace</label>
+              <textarea
+                id="wks"
+                formControlName="informacion_workspace"
+                name="informacion_workspace"
+                placeholder="Ingrese información de Workspace"
+                required
+              >
+              </textarea>
             </div>
+            <h5>DATACENTER</h5>
+            <div class="temp-div">
+              <label for="temp">Temperatura</label>
+              <input
+                type="number"
+                id="temp"
+                formControlName="temperatura_datacenter"
+                name="temperatura_datacenter"
+                placeholder="Ingrese temperatura"
+                required
+              />
+            </div>
+          </div>
         </div>
         <div class="v_fisica">
           <div class="v_fisica_1">
-            <label for="v_fisica_one"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"/></svg> Cargar Imagen 1</label>
+            <label for="v_fisica_one"
+              ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                <path
+                  d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"
+                />
+              </svg>
+              Cargar Imagen 1</label
+            >
             <input
               type="file"
               id="v_fisica_one"
@@ -149,7 +265,15 @@
             </div>
           </div>
           <div class="v_fisica_2">
-            <label for="v_fisica_two"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"/></svg> Cargar Imagen 2</label>
+            <label for="v_fisica_two"
+              ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                <path
+                  d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"
+                />
+              </svg>
+              Cargar Imagen 2</label
+            >
             <input
               type="file"
               id="v_fisica_two"
@@ -351,7 +475,10 @@
           <th mat-header-cell *matHeaderCellDef>Verificación 1</th>
           <td mat-cell *matCellDef="let element">
             <img
-              src="{{'https://banasanitss.s3.us-east-2.amazonaws.com/'+element.v_fisica_1}}"
+              src="{{
+                'https://cibanasanitss.s3.us-east-2.amazonaws.com/' +
+                  element.v_fisica_1
+              }}"
               alt=""
             />
           </td>
@@ -361,7 +488,10 @@
           <th mat-header-cell *matHeaderCellDef>Verificación 2</th>
           <td mat-cell *matCellDef="let element">
             <img
-              src="{{'https://banasanitss.s3.us-east-2.amazonaws.com/'+element.v_fisica_2}} "
+              src="{{
+                'https://cibanasanitss.s3.us-east-2.amazonaws.com/' +
+                  element.v_fisica_2
+              }} "
               alt=""
             />
           </td>
@@ -382,28 +512,47 @@
         </ng-container>
 
         @if (!isAdmin) {
-          <ng-container matColumnDef="Aprobado Por">
-            <th mat-header-cell *matHeaderCellDef> Aprobado Por </th>
-            <td mat-cell *matCellDef="let element">
-                @if (element.aprobado_por) {
-                    {{element.aprobado_por}} 
-                }@else {
-                    <p>Pendiente</p>
-                }
-                </td>
-          </ng-container>
-      }@else {
         <ng-container matColumnDef="Aprobado Por">
-            <th mat-header-cell *matHeaderCellDef> Actions </th>
-            <td mat-cell *matCellDef="let element">
-                @if (element.aprobado_por) {
-                    <svg class="aprobado" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM625 177L497 305c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L591 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
-                }@else {
-                    <svg (click)="aprobar(element)" class="aprobar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M96 80c0-26.5 21.5-48 48-48H432c26.5 0 48 21.5 48 48V384H96V80zm313 47c-9.4-9.4-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L409 161c9.4-9.4 9.4-24.6 0-33.9zM0 336c0-26.5 21.5-48 48-48H64V416H512V288h16c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V336z"/></svg>
-                }
-                </td>
-          </ng-container>
-      }
+          <th mat-header-cell *matHeaderCellDef>Aprobado Por</th>
+          <td mat-cell *matCellDef="let element">
+            @if (element.aprobado_por) {
+            {{ element.aprobado_por }}
+            }@else {
+            <p>Pendiente</p>
+            }
+          </td>
+        </ng-container>
+        }@else {
+        <ng-container matColumnDef="Aprobado Por">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let element">
+            @if (element.aprobado_por) {
+            <svg
+              class="aprobado"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 640 512"
+            >
+              <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+              <path
+                d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM625 177L497 305c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L591 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
+              />
+            </svg>
+            }@else {
+            <svg
+              (click)="aprobar(element)"
+              class="aprobar"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 576 512"
+            >
+              <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+              <path
+                d="M96 80c0-26.5 21.5-48 48-48H432c26.5 0 48 21.5 48 48V384H96V80zm313 47c-9.4-9.4-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L409 161c9.4-9.4 9.4-24.6 0-33.9zM0 336c0-26.5 21.5-48 48-48H64V416H512V288h16c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V336z"
+              />
+            </svg>
+            }
+          </td>
+        </ng-container>
+        }
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
@@ -422,12 +571,18 @@
     <div class="charts">
       <div class="chart1">
         <div class="chart">
-          <app-chart1 [fechas]="fechas" [IPEMax]="IPEMax" [IPSMax]="IPSMax" [CPEMax]="CPEMax" [CPSMax]="CPSMax"></app-chart1>
+          <app-chart1
+            [fechas]="fechas"
+            [IPEMax]="IPEMax"
+            [IPSMax]="IPSMax"
+            [CPEMax]="CPEMax"
+            [CPSMax]="CPSMax"
+          ></app-chart1>
         </div>
       </div>
       <div class="chart2">
         <div class="chart">
-            <app-chart2></app-chart2>
+          <app-chart2></app-chart2>
         </div>
       </div>
     </div>

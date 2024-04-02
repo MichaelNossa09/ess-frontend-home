@@ -1,7 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Component, EventEmitter } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { Subject } from 'rxjs';
@@ -20,17 +30,18 @@ export interface EstatusServidorElements {
   consumo_de_red: any;
 }
 
-
 @Component({
   selector: 'app-estatus',
   standalone: true,
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     MatTableModule,
     MatPaginatorModule,
     HttpClientModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+  ],
   templateUrl: './estatus.component.html',
-  styleUrl: './estatus.component.css'
+  styleUrl: './estatus.component.css',
 })
 export class EstatusComponent {
   changes = new Subject<void>();
@@ -40,15 +51,16 @@ export class EstatusComponent {
   nextPageLabel = 'Siguiente Página';
   previousPageLabel = 'Página Anterior';
 
-  public baseUrl = 'http://ess:8090/api';
-  public estatusUrl = 'http://ess:8090/api/estatus';
-  public serversUrl = 'http://ess:8090/api/estatusServers';
-  public estatusServeUrl = 'http://ess:8090/api/estatusDetail';
+  public baseUrl = 'https://controlriesgos.banasan.com.co:8091/itss';
+  public estatusUrl = 'https://controlriesgos.banasan.com.co:8091/itss/estatus';
+  public serversUrl =
+    'https://controlriesgos.banasan.com.co:8091/itss/estatusServers';
+  public estatusServeUrl =
+    'https://controlriesgos.banasan.com.co:8091/itss/estatusDetail';
 
   contServer = 0;
-  
-  isAdmin = false;
 
+  isAdmin = false;
 
   getRangeLabel(page: number, pageSize: number, length: number): string {
     if (length === 0) {
@@ -75,7 +87,7 @@ export class EstatusComponent {
   dataSource: any;
   user: any;
   estatus: any;
-  servidores : any;
+  servidores: any;
   nodos: any;
   dataCargada: boolean = false;
   idStatus: any;
@@ -86,14 +98,14 @@ export class EstatusComponent {
   public previsualizacion2: string;
   modal: boolean = true;
   estatusServers: any;
-  servers : any [] = [];
+  servers: any[] = [];
 
   estatusForm = new FormGroup({
     registrado_por: new FormControl('', [Validators.required]),
     v_fisica_1: new FormControl('', [Validators.required]),
     v_fisica_2: new FormControl('', [Validators.required]),
     aprobado_por: new FormControl('Pendiente', [Validators.required]),
-    estado: new FormControl('', [Validators.required])
+    estado: new FormControl('', [Validators.required]),
   });
 
   formulariosPorServidor: { [key: string]: FormGroup } = {};
@@ -103,8 +115,9 @@ export class EstatusComponent {
     private http: HttpClient,
     private sanitizer: DomSanitizer,
     private dataPoolService: DataPoolService,
-    private fb: FormBuilder) {
-   this.service.getUser().subscribe({
+    private fb: FormBuilder
+  ) {
+    this.service.getUser().subscribe({
       next: (res) => {
         this.user = res.data;
         if (this.user.rol == 'Admin') {
@@ -118,7 +131,6 @@ export class EstatusComponent {
         console.error(error);
       },
     });
-
   }
 
   aprobar(element: any) {
@@ -128,48 +140,52 @@ export class EstatusComponent {
       Authorization: `Bearer ${authToken}`,
     });
     const requestBody = {
-      aprobado_por: this.user.name
+      aprobado_por: this.user.name,
     };
-    
-    this.http.put<any>(`${this.estatusUrl}/${element.id}`, requestBody, { headers }).subscribe({
-      next: (res) => {
-        if (res) {
-          this.GetEstatus();
-          if (this.user.correo == 'seguridadinformatica@banasan.com.co') {
-            this.service
-              .postNotificacion(
-                '../../../assets/Jersson.jpg',
-                this.user.name,
-                'Ha aprobado un registro de Estatus'
-              )
-              .subscribe({
-                next: (res) => {
-                  this.service.getNotificaciones().subscribe({
-                    next: (res) => {
-                      document.querySelector('.alert-success-aprob')?.classList.add('show');
-                      setTimeout(function() {
-                        document.querySelector('.alert-success-aprob')?.classList.remove('show');
-                      }, 3000);
-                    },
-                    error: (error) => {
-                      console.log(error.error.error);
-                    },
-                  });
-                },
-                error: (error) => {
-                  console.log(error.error.error);
-                },
-              });
+
+    this.http
+      .put<any>(`${this.estatusUrl}/${element.id}`, requestBody, { headers })
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            this.GetEstatus();
+            if (this.user.correo == 'seguridadinformatica@banasan.com.co') {
+              this.service
+                .postNotificacion(
+                  '../../../assets/Jersson.jpg',
+                  this.user.name,
+                  'Ha aprobado un registro de Estatus'
+                )
+                .subscribe({
+                  next: (res) => {
+                    this.service.getNotificaciones().subscribe({
+                      next: (res) => {
+                        document
+                          .querySelector('.alert-success-aprob')
+                          ?.classList.add('show');
+                        setTimeout(function () {
+                          document
+                            .querySelector('.alert-success-aprob')
+                            ?.classList.remove('show');
+                        }, 3000);
+                      },
+                      error: (error) => {
+                        console.log(error.error.error);
+                      },
+                    });
+                  },
+                  error: (error) => {
+                    console.log(error.error.error);
+                  },
+                });
+            }
           }
-        }
-      },
-      error: (error) => {
-        console.log(error.error);
-      },
-    });
+        },
+        error: (error) => {
+          console.log(error.error);
+        },
+      });
   }
-
-
 
   GetEstatus() {
     const authToken = this.service.getDecryptedToken();
@@ -182,78 +198,75 @@ export class EstatusComponent {
       Authorization: `Bearer ${authToken}`,
     });
 
-    this.http
-      .get<any>(`${this.estatusUrl}`, { headers })
-      .subscribe({
-        next: (res) => {
-          if (res) {
-            this.estatus = res;
-            if(res.length > 0){
-              const lastPosition = res.length - 1;
-              if(res[lastPosition].estado == 'Pendiente'){
-                this.idStatus = res[lastPosition].id;
-                this.estatusForm.disable();
+    this.http.get<any>(`${this.estatusUrl}`, { headers }).subscribe({
+      next: (res) => {
+        if (res) {
+          this.estatus = res;
+          if (res.length > 0) {
+            const lastPosition = res.length - 1;
+            if (res[lastPosition].estado == 'Pendiente') {
+              this.idStatus = res[lastPosition].id;
+              this.estatusForm.disable();
 
-                this.http.get<any>(`${this.serversUrl}/${this.idStatus}`, { headers }).subscribe({
+              this.http
+                .get<any>(`${this.serversUrl}/${this.idStatus}`, { headers })
+                .subscribe({
                   next: (res) => {
                     this.estatusServers = res.servers;
 
-                     res.servers.map((server: any) => {
-                      this.servers.push(parseInt(server.servidor_id)) 
-                     });
-                  }, error: (error) => {
-                    console.error(error.error)
-                  }
-                })
-            }
+                    res.servers.map((server: any) => {
+                      this.servers.push(parseInt(server.servidor_id));
+                    });
+                  },
+                  error: (error) => {
+                    console.error(error.error);
+                  },
+                });
             }
           }
-        },
-        error: (error) => {
-          console.error(error.error);
-        },
-      });
+        }
+      },
+      error: (error) => {
+        console.error(error.error);
+      },
+    });
   }
 
-  GetServidores(){
+  GetServidores() {
     const authToken = this.service.getDecryptedToken();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${authToken}`,
     });
 
-    this.http
-      .get<any>(`${this.baseUrl}/servidor`, { headers })
-      .subscribe({
-        next: (res) => {
-          if (res) {
-            this.servidores = res;
-          }
-        },
-        error: (error) => {
-          console.log(error.error.error);
-        },
-      });
+    this.http.get<any>(`${this.baseUrl}/servidor`, { headers }).subscribe({
+      next: (res) => {
+        if (res) {
+          this.servidores = res;
+        }
+      },
+      error: (error) => {
+        console.log(error.error.error);
+      },
+    });
   }
-  GetNodos(){
+  GetNodos() {
     const authToken = this.service.getDecryptedToken();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${authToken}`,
     });
 
-    this.http
-      .get<any>(`${this.baseUrl}/nodo`, { headers })
-      .subscribe({
-        next: (res) => {
-          if (res) {
-            this.nodos = res;
-          }
-        },
-        error: (error) => {
-          console.log(error.error.error);
-        },
-      });
+    this.http.get<any>(`${this.baseUrl}/nodo`, { headers }).subscribe({
+      next: (res) => {
+        if (res) {
+          this.nodos = res;
+        }
+      },
+      error: (error) => {
+        console.log(error.error.error);
+      },
+    });
   }
   extraerBase64 = async ($event: any) => {
     try {
@@ -281,7 +294,7 @@ export class EstatusComponent {
     }
   };
 
-  enabled: boolean = false;
+  enabled: boolean = true;
   onEstatus() {
     this.estatusForm.controls['estado'].setValue('Pendiente');
     if (this.estatusForm.valid) {
@@ -293,14 +306,15 @@ export class EstatusComponent {
       const formData = new FormData();
       formData.append('v_fisica_1', this.archivo1);
       formData.append('v_fisica_2', this.archivo2);
-      if(this.user){
-        formData.append('registrado_por', this.user.name); 
+      if (this.user) {
+        formData.append('registrado_por', this.user.name);
       }
-      if(status){
-        formData.append('estado', status)
+      if (status) {
+        formData.append('estado', status);
       }
 
-      this.http.post<any>(`${this.estatusUrl}`, formData, { headers })
+      this.http
+        .post<any>(`${this.estatusUrl}`, formData, { headers })
         .subscribe({
           next: (res) => {
             if (res) {
@@ -308,8 +322,10 @@ export class EstatusComponent {
               this.previsualizacion2 = '';
               this.enabled = true;
               document.querySelector('.alert-success')?.classList.add('show');
-              setTimeout(function() {
-                document.querySelector('.alert-success')?.classList.remove('show');
+              setTimeout(function () {
+                document
+                  .querySelector('.alert-success')
+                  ?.classList.remove('show');
               }, 3000);
             }
           },
@@ -317,28 +333,40 @@ export class EstatusComponent {
             console.error(error.error);
           },
         });
-        
     } else {
       alert('Verifica los Campos, por favor.');
     }
   }
-  onEstatusForm(serve: any): void{
-    this.formulariosPorServidor[serve.id].controls['estatus_id'].setValue(this.idStatus);
-    this.formulariosPorServidor[serve.id].controls['servidor_id'].setValue(serve.id);
-    if(this.formulariosPorServidor[serve.id].valid){
+  onEstatusForm(serve: any): void {
+    this.formulariosPorServidor[serve.id].controls['estatus_id'].setValue(
+      this.idStatus
+    );
+    this.formulariosPorServidor[serve.id].controls['servidor_id'].setValue(
+      serve.id
+    );
+    if (this.formulariosPorServidor[serve.id].valid) {
       const authToken = this.service.getDecryptedToken();
       const headers = new HttpHeaders({
         Authorization: `Bearer ${authToken}`,
       });
 
-      this.http.post<any>(`${this.estatusServeUrl}`, this.formulariosPorServidor[serve.id].value, { headers })
+      this.http
+        .post<any>(
+          `${this.estatusServeUrl}`,
+          this.formulariosPorServidor[serve.id].value,
+          { headers }
+        )
         .subscribe({
           next: (res) => {
-            if (res) { 
+            if (res) {
               this.GetEstatus();
-              document.querySelector('.alert-success-serve')?.classList.add('show');
-              setTimeout(function() {
-                document.querySelector('.alert-success-serve')?.classList.remove('show');
+              document
+                .querySelector('.alert-success-serve')
+                ?.classList.add('show');
+              setTimeout(function () {
+                document
+                  .querySelector('.alert-success-serve')
+                  ?.classList.remove('show');
               }, 3000);
             }
             this.GetEstatus();
@@ -347,23 +375,41 @@ export class EstatusComponent {
             console.error(error.error);
           },
         });
-    }else{
+    } else {
       alert('Verifique los campos, por favor.');
     }
   }
-  crearFormGroup(serve: any): FormGroup{
+  crearFormGroup(serve: any): FormGroup {
     if (!this.formulariosPorServidor[serve.id]) {
-
-      if (this.servers.includes(serve.id) && this.estatusServers.some((estatus: any) => estatus.servidor_id == serve.id)) {
-        const estatusCorrespondiente = this.estatusServers.find((estatus: any) => estatus.servidor_id == serve.id);
-         this.formulariosPorServidor[serve.id] = this.fb.group({
-          estatus_id: [estatusCorrespondiente.estatus_id, [Validators.required]],
+      if (
+        this.servers.includes(serve.id) &&
+        this.estatusServers.some(
+          (estatus: any) => estatus.servidor_id == serve.id
+        )
+      ) {
+        const estatusCorrespondiente = this.estatusServers.find(
+          (estatus: any) => estatus.servidor_id == serve.id
+        );
+        this.formulariosPorServidor[serve.id] = this.fb.group({
+          estatus_id: [
+            estatusCorrespondiente.estatus_id,
+            [Validators.required],
+          ],
           servidor_id: [serve.id],
-          almacenamiento_disponible: [estatusCorrespondiente.almacenamiento_disponible, [Validators.required]],
-          almacenamiento_ocupado: [estatusCorrespondiente.almacenamiento_ocupado, [Validators.required]],
+          almacenamiento_disponible: [
+            estatusCorrespondiente.almacenamiento_disponible,
+            [Validators.required],
+          ],
+          almacenamiento_ocupado: [
+            estatusCorrespondiente.almacenamiento_ocupado,
+            [Validators.required],
+          ],
           cpu: [estatusCorrespondiente.cpu, [Validators.required]],
           memoria: [estatusCorrespondiente.memoria, [Validators.required]],
-          consumo_de_red: [estatusCorrespondiente.consumo_de_red, [Validators.required]],
+          consumo_de_red: [
+            estatusCorrespondiente.consumo_de_red,
+            [Validators.required],
+          ],
         });
         this.formulariosPorServidor[serve.id].disable();
         this.contServer++;
@@ -384,38 +430,44 @@ export class EstatusComponent {
     return this.formulariosPorServidor[serve.id];
   }
 
-  ActualizarEstado(){
-    if(this.servidores.length == this.contServer){
+  ActualizarEstado() {
+    if (this.servidores.length == this.contServer) {
       const formData = {
-        estado: 'Finalizado'
+        estado: 'Finalizado',
       };
       const authToken = this.service.getDecryptedToken();
       const headers = new HttpHeaders({
         Authorization: `Bearer ${authToken}`,
       });
 
-      this.http.put<any>(`${this.estatusUrl}/${this.idStatus}`, formData, { headers })
+      this.http
+        .put<any>(`${this.estatusUrl}/${this.idStatus}`, formData, { headers })
         .subscribe({
           next: (res) => {
             if (res) {
-              this.estadoStatus = 'Finalizado'
-              this.contServer=0;
+              this.estadoStatus = 'Finalizado';
+              this.contServer = 0;
               this.GetEstatus();
-              document.querySelector('.alert-success-aprob')?.classList.add('show');
-              setTimeout(function() {
-                document.querySelector('.alert-success-aprob')?.classList.remove('show');
+              document
+                .querySelector('.alert-success-aprob')
+                ?.classList.add('show');
+              setTimeout(function () {
+                document
+                  .querySelector('.alert-success-aprob')
+                  ?.classList.remove('show');
               }, 3000);
-              window.location.reload(); 
+              window.location.reload();
             }
           },
           error: (error) => {
             console.error(error.error);
           },
         });
-    }else{
-      alert('Para finalizar el Estatus es necesario terminar de adicionar todos los servidores.');
+    } else {
+      alert(
+        'Para finalizar el Estatus es necesario terminar de adicionar todos los servidores.'
+      );
     }
-    
   }
 
   handleFileInput1(event: any): void {

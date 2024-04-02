@@ -4,7 +4,11 @@ import { ConectividadComponent } from '../conectividad/conectividad.component';
 import { EstatusComponent } from '../estatus/estatus.component';
 import { ConfiguracionesComponent } from '../configuraciones/configuraciones.component';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Router } from '@angular/router';
 import { EncryptService } from '../../services/encrypt.service';
 import { PoolsComponent } from '../pools/pools.component';
@@ -13,12 +17,19 @@ import { Observable, Subscription } from 'rxjs';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent, ConectividadComponent, EstatusComponent, ConfiguracionesComponent, CommonModule, HttpClientModule, PoolsComponent],
+  imports: [
+    HeaderComponent,
+    ConectividadComponent,
+    EstatusComponent,
+    ConfiguracionesComponent,
+    CommonModule,
+    HttpClientModule,
+    PoolsComponent,
+  ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
-export class HomeComponent{
-
+export class HomeComponent {
   notificaciones: any[] = [];
   isAdmin = false;
   constructor(
@@ -27,24 +38,24 @@ export class HomeComponent{
     private service: EncryptService
   ) {
     this.GetUser();
-      this.service.getNotificaciones().subscribe({
+    this.service.getNotificaciones().subscribe({
       next: (res) => {
         this.notificaciones = res.slice().reverse();
       },
       error: (error) => {
         console.log(error.error);
-      }
+      },
     });
   }
 
-  private apiUrl = 'http://ess:8090/api';
+  private apiUrl = 'https://controlriesgos.banasan.com.co:8091/itss';
   data: any;
   vista: string = 'Estatus';
 
   GetUser() {
     const authToken = this.service.getDecryptedToken();
     const correo = this.service.getDecryptedEmail();
-    
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${authToken}`,
@@ -54,10 +65,10 @@ export class HomeComponent{
       next: (res) => {
         if (res.exito == 1) {
           this.data = res.data;
-          if(this.data.rol == 'Admin'){
+          if (this.data.rol == 'Admin') {
             this.isAdmin = true;
           }
-        }else{
+        } else {
           localStorage.removeItem('tk');
           localStorage.removeItem('correo');
           this.router.navigate(['/login']);
@@ -82,7 +93,7 @@ export class HomeComponent{
       next: (res) => {
         localStorage.removeItem('tk');
         localStorage.removeItem('correo');
-        localStorage.removeItem('user');  
+        localStorage.removeItem('user');
         this.router.navigate(['/login']);
       },
       error: (error) => {

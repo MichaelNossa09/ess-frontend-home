@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { AES, enc } from 'crypto-js';
 import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EncryptService {
-  private apiUrl = 'http://ess:8090/api';
-  constructor(private http: HttpClient) { }
+  private apiUrl = 'https://controlriesgos.banasan.com.co:8091/itss';
+  constructor(private http: HttpClient) {}
   getDecryptedToken(): string | null {
     const encryptedToken = localStorage.getItem('tk');
     if (encryptedToken) {
@@ -32,9 +32,7 @@ export class EncryptService {
     return null;
   }
 
-
-
-  getUser(): Observable<any>{
+  getUser(): Observable<any> {
     const correo = this.getDecryptedEmail();
     const token = this.getDecryptedToken();
 
@@ -46,7 +44,7 @@ export class EncryptService {
     return this.http.get<any[]>(`${this.apiUrl}/user/${correo}`, { headers });
   }
 
-  getNotificaciones(): Observable<any>{
+  getNotificaciones(): Observable<any> {
     const token = this.getDecryptedToken();
 
     const headers = new HttpHeaders({
@@ -57,20 +55,22 @@ export class EncryptService {
     return this.http.get<any[]>(`${this.apiUrl}/notificaciones`, { headers });
   }
 
-  postNotificacion(photo: any, name: any, comment: any): Observable<any>{
+  postNotificacion(photo: any, name: any, comment: any): Observable<any> {
     const token = this.getDecryptedToken();
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     });
-    
+
     const body = {
       photo: photo,
       name: name,
-      message: comment
+      message: comment,
     };
 
-    return this.http.post<any[]>(`${this.apiUrl}/notificaciones`, body, { headers });
+    return this.http.post<any[]>(`${this.apiUrl}/notificaciones`, body, {
+      headers,
+    });
   }
 }
